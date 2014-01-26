@@ -1,0 +1,916 @@
+<template name="tmpl_board">
+
+<div class="page-index  chrome chrome-32 windows extra-large-window body-board-background" style="background-color: rgb(35, 113, 159);">
+
+<div id="nocss">
+	Your browser was unable to load all of Trello's resources. They may have been blocked by your firewall, proxy or browser configuration.
+	<br>Press Ctrl+F5 or Ctrl+Shift+R to have your browser try again.
+	<hr>
+</div>
+<div id="surface" class="clearfix" style="">
+<div id="header">
+	<a class="header-logo js-home-via-logo" href="https://trello.com/" title="Go back to your boards page."> <span class="header-logo-loading"></span>  <span class="header-logo-default"></span>
+	</a>
+	<div class="header-boards-button">
+		<a class="header-btn header-boards js-boards-menu" title="View list of boards" href="https://trello.com/b/jX1VpidH/tdocs#"> <span class="header-btn-icon icon-lg icon-board light"></span>  <span class="header-btn-text">Boards</span>
+		</a>
+	</div>
+	<form>
+		<a href="https://trello.com/b/jX1VpidH/tdocs#" class="header-btn show-search-btn js-show-search" title="Search for boards, cards, members, and organizations."> <span class="header-btn-icon icon-lg icon-search light"></span>
+		</a>
+		<div id="header-search">
+			<label for="search-text">Global Search</label>
+			<input id="search-text" type="text" autocomplete="off" autocorrect="off" spellcheck="false" value="">
+			<input id="search-submit" type="submit" value="Search">
+			<a class="header-btn header-search js-search-submit" href="https://trello.com/b/jX1VpidH/tdocs#" title="Search for boards, cards, members, and organizations."> <span class="header-btn-icon icon-lg icon-search light"></span>
+			</a>
+		</div>
+	</form>
+	<div>
+		<a class="header-btn header-woof woof-hide" href="https://trello.com/b/jX1VpidH/tdocs#"> <span class="taco-talk-small-icon"></span>  <span class="header-btn-text"><span class="left-arrow"></span>Roo! (<span class="js-phrase">New stuff available!</span>)</span>
+		</a>
+	</div>
+	<div class="header-user">
+		<a class="header-btn header-btn-feedback js-open-feedback hide" title="You are seeing an early, experimental version of Trello. We would love your feedback!" href="https://trello.com/b/jX1VpidH/tdocs#"> <span class="header-btn-icon icon-lg icon-comment light"></span>  <span class="header-btn-text">Give us feedback.</span>
+		</a> <a class="header-btn hide upgrade" href="https://trello.com/b/jX1VpidH/tdocs#" ,="" onclick="window.location.reload();"><span class="icon-sm icon-reopen light"></span><span class="header-btn-text">Update Available</span></a>
+		<a class="header-btn js-open-add-menu"
+		   href="https://trello.com/b/jX1VpidH/tdocs#" title="Add a new board or organization."> <span class="header-btn-icon icon-lg icon-add light"></span>
+		</a>
+		<a class="header-btn header-member js-open-header-member-menu" href="https://trello.com/b/jX1VpidH/tdocs#" title="Get access to your profile, help, and log out."> <span class="member"> <img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)" title="johntday (johntday)">        <span class="member-gold-badge" title="This member has Trello Gold."></span> </span>
+                    <span
+		                    class="header-btn-text js-member-name">johntday</span>
+		</a>
+		<a class="header-btn header-notifications js-open-header-notifications-menu" href="https://trello.com/b/jX1VpidH/tdocs#" title="0 Notifications. Click to view notifications."> <span class="header-btn-icon icon-lg icon-notification light"></span>
+		</a>
+	</div>
+</div>
+<p id="notification" style="display: none;"></p>
+<div id="content" class="clearfix">
+<div class="board-wrapper disabled-all-widgets">
+<!--<div class="board-wrapper">-->
+<div class="board-header clearfix js-board-header">
+	<a href="https://trello.com/b/jX1VpidH/tdocs#" class="board-header-btn board-header-btn-name js-rename-board" title="Rename the board."> <span class="board-header-btn-text"> Tdocs </span>
+	</a>
+	<a href="https://trello.com/mymeteor" class="board-header-btn board-header-btn-org-name js-org-name board-header-btn-without-icon" title="This board is part of the My Meteor organization"> <span class="board-header-btn-text">My Meteor</span>
+	</a>
+	<div class="board-header-btns left">
+		<a href="https://trello.com/b/jX1VpidH/tdocs#" class="board-header-btn js-star-board" title="Click to star or unstar this board. Starred boards show up at the top of your boards list."> <span class="board-header-btn-icon icon-sm icon-star js-star-board-icon"></span>
+		</a>
+		<a href="https://trello.com/b/jX1VpidH/tdocs#" class="board-header-btn js-open-desc js-fill-desc" title="Collab with Ben"> <span class="board-header-btn-icon icon-sm icon-edit"></span>
+		</a> <a href="https://trello.com/b/jX1VpidH/tdocs#" class="board-header-btn perms-btn js-change-vis" id="permission-level" title="This board is visible to members of My Meteor.  Only people added to the board can edit."><span class="board-header-btn-icon icon-sm icon-org-private"></span> <span class="board-header-btn-text">Org Visible</span> </a>
+	</div>
+	<div class="board-header-btns right">
+		<a href="https://trello.com/b/jX1VpidH/tdocs#" class="board-header-btn board-header-btn-filter-indicator hide js-filter-cards-indicator" title="You are filtering cards on this board. Click here to edit filter."> <span class="board-header-btn-icon icon-sm icon-filter"></span>  <span class="board-header-btn-text underline">Filtering is on.</span>  <span class="board-header-btn-icon-close icon-sm icon-close js-filter-card-clear" title="Clear filter."></span>
+		</a>
+		<div class="board-header-btn sub-btn hide js-board-header-subscribed" title="You are subscribed to this board. You&#39;ll get notifications about changes."> <span class="board-header-btn-icon icon-sm icon-follow"></span>  <span class="board-header-btn-text underline">Subscribed</span>
+		</div>
+		<a href="https://trello.com/b/jX1VpidH/tdocs#" class="board-header-btn calendar-btn hide js-calendar" title="View all your cards with due dates in a calendar view."> <span class="board-header-btn-icon icon-sm icon-cal"></span>  <span class="board-header-btn-text underline">Calendar</span>
+		</a>
+	</div>
+</div>
+<a href="https://trello.com/b/jX1VpidH/tdocs#" class="sidebar-show-btn dark-hover js-show-sidebar"> <span class="icon-sm icon-leftarrow"></span>  <span class="text">Show sidebar</span>
+</a>
+<div class="board-widgets">
+<div>
+<a href="https://trello.com/b/jX1VpidH/tdocs#" class="sidebar-hide-btn dark-hover js-hide-sidebar" title="Close the board sidebar."> <span class="icon-sm icon-rightarrow"></span>
+</a>
+<div class="board-widgets-title clearfix">
+	<a href="https://trello.com/b/jX1VpidH/tdocs#" class="board-sidebar-back-btn js-pop-widget-view"><span class="left-arrow"></span>Back</a>
+	<h3 class="text js-widget-title"></h3>
+	<hr>
+</div>
+<div class="board-widgets-content-wrapper">
+	<div class="board-widgets-content default fancy-scrollbar" style="height:{{board_widgets_content_height}}px;">
+		<p class="error js-file-too-large" style="margin: 12px 0 6px; display:none;">File too large. 10mb limit.</p>
+		<div class="board-widget board-widget-nav clearfix collapsed">
+			<h3 class="dark-hover toggle-widget-nav js-toggle-widget-nav" title="Click here to see more board options."> Menu <span class="icon-sm icon-leftarrow toggle-menu-icon"></span>
+			</h3>
+			<ul class="nav-list">
+				<hr style="margin-top: 0;">
+				<li>
+					<a href="https://trello.com/b/jX1VpidH/tdocs#" class="js-open-card-filter"> <span class="icon-sm icon-filter icon-type"></span> Filter cards</a>
+				</li>
+				<li>
+					<a href="https://trello.com/b/jX1VpidH/tdocs#" class="js-open-archive"> <span class="icon-sm icon-archive icon-type"></span> Archived items</a>
+				</li>
+				<li>
+					<a href="https://trello.com/b/jX1VpidH/tdocs#" class="js-open-stickers"> <span class="icon-sm icon-sticker icon-type"></span> Stickers</a>
+				</li>
+				<li>
+					<a href="https://trello.com/b/jX1VpidH/tdocs#" class="js-open-power-ups"> <span class="icon-sm icon-rocket icon-type"></span> Power-Ups</a>
+				</li>
+				<li>
+					<a href="https://trello.com/b/jX1VpidH/tdocs#" class="js-open-settings"> <span class="icon-sm icon-gear icon-type"></span> Settings</a>
+				</li>
+				<hr>
+				<li class="sub-item">
+					<a class="dark-hover js-board-subscribe" href="https://trello.com/b/jX1VpidH/tdocs#"> <span class="js-subscribed-state">Subscribe </span>
+					</a>
+				</li>
+				<li class="sub-item"> <a class="js-copy-board" href="https://trello.com/b/jX1VpidH/tdocs#"> Copy Board? </a>
+				</li>
+				<li class="sub-item"> <a class="js-share" href="https://trello.com/b/jX1VpidH/tdocs#"> Share, Print, and Export? </a>
+				</li>
+				<hr>
+				<li class="sub-item"> <a class="js-close-board" href="https://trello.com/b/jX1VpidH/tdocs#">Close Board?</a>
+				</li>
+				<li class="sub-item"> <a class="js-leave-board" href="https://trello.com/b/jX1VpidH/tdocs#">Leave Board?</a>
+				</li>
+			</ul>
+		</div>
+		<div class="js-ad"></div>
+		<hr>
+		<div class="board-widget board-widget-members clearfix">
+			<div class="board-widget-title">
+				<h3>Members</h3>
+			</div>
+			<div class="board-widget-content">
+				<div class="board-widget-members js-list-board-members clearfix js-list-draggable-board-members">
+					<div class="member ui-draggable">
+						<img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)" title="johntday (johntday)"> <span class="member-status active" title="This member is online and viewing Trello."></span>  <span class="member-type admin" title="This member is an admin of this board."></span>  <span class="member-gold-badge"
+						                                                                                                                                                                                                                                                                                                                       title="This member has Trello Gold."></span>
+					</div>
+					<div class="member ui-draggable"> <span class="member-initials" title="Ben Venker (benvenker)"> BV  </span>  <span class="member-status disconnected" title="This member is offline."></span>  <span class="member-type admin" title="This member is an admin of this board."></span>
+                                                <span
+		                                                class="member-gold-badge" title="This member has Trello Gold."></span>
+					</div>
+				</div>
+				<div class="js-list-observers"></div>
+				<a href="https://trello.com/b/jX1VpidH/tdocs#" class="button-link js-open-manage-board-members"> <span class="icon-sm icon-member"></span> Add Members?</a>
+			</div>
+		</div>
+		<hr>
+		<div class="board-widget board-widget-activity bottom clearfix">
+			<div class="board-widget-title">
+				<h3>Activity</h3>
+			</div>
+			<div class="board-widget-content">
+				<div class="activity-gradient-t"></div>
+				<div class="activity-gradient-b"></div>
+				<div class="board-actions-list fancy-scrollbar" style="max-height:{{board_actions_list_height}}px;">
+					<div class="js-sidebar-list-actions">
+						<div class="phenom clearfix">
+							<div class="creator member js-show-mem-menu">
+								<img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)" title="johntday (johntday)"> <span class="member-gold-badge" title="This member has Trello Gold."></span>
+							</div>
+							<div class="phenom-desc"> <a class="inline-object js-show-mem-menu" href="https://trello.com/51788b9f1c5644984a0075c9">johntday</a> completed <a href="http://www.mozilla.org/MPL/2.0/" target="_blank">http://www.mozilla.org/MPL/2.0/</a> on
+								<a
+										href="https://trello.com/c/6mQxDKKD/16-license" class="inline-object action-card">License</a>.</div>
+							<p class="phenom-meta quiet"> <span class="date js-hide-on-sending" dt="2014-01-24T19:11:28.876Z" title="1/24/2014 1:11:22 PM">an hour ago</span>  <span class="js-spinner hide"><span class="spinner small left" style="margin-right: 4px;"></span> Sending?</span>
+                                                        <span
+		                                                        class="js-hide-on-sending"></span>
+							</p>
+						</div>
+						<div class="phenom clearfix">
+							<div class="creator member js-show-mem-menu">
+								<img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)" title="johntday (johntday)"> <span class="member-gold-badge" title="This member has Trello Gold."></span>
+							</div>
+							<div class="phenom-desc"> <a class="inline-object js-show-mem-menu" href="https://trello.com/51788b9f1c5644984a0075c9">johntday</a> added <a href="https://trello.com/c/d7msKeO6/26-leave" class="inline-object action-card">leave</a> to
+								To Do and added Checklist.</div>
+							<p class="phenom-meta quiet"> <span class="date js-hide-on-sending" dt="2014-01-24T19:09:57.155Z" title="1/24/2014 1:09:50 PM">an hour ago</span>  <span class="js-spinner hide"><span class="spinner small left" style="margin-right: 4px;"></span> Sending?</span>
+                                                        <span
+		                                                        class="js-hide-on-sending"></span>
+							</p>
+						</div>
+						<div class="phenom clearfix">
+							<div class="creator member js-show-mem-menu">
+								<img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)" title="johntday (johntday)"> <span class="member-gold-badge" title="This member has Trello Gold."></span>
+							</div>
+							<div class="phenom-desc"> <a class="inline-object js-show-mem-menu" href="https://trello.com/51788b9f1c5644984a0075c9">johntday</a> added <a href="https://trello.com/c/ubpXOMw1/25-ui-html-css" class="inline-object action-card">UI: html/css</a> to
+								Ideas and added Checklist.</div>
+							<p class="phenom-meta quiet"> <span class="date js-hide-on-sending" dt="2014-01-24T19:05:18.228Z" title="1/24/2014 1:05:11 PM">an hour ago</span>  <span class="js-spinner hide"><span class="spinner small left" style="margin-right: 4px;"></span> Sending?</span>
+                                                        <span
+		                                                        class="js-hide-on-sending"></span>
+							</p>
+						</div>
+						<div class="phenom clearfix">
+							<div class="creator member js-show-mem-menu">
+								<img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)" title="johntday (johntday)"> <span class="member-gold-badge" title="This member has Trello Gold."></span>
+							</div>
+							<div class="phenom-desc"> <a class="inline-object js-show-mem-menu" href="https://trello.com/51788b9f1c5644984a0075c9">johntday</a> joined <a href="https://trello.com/c/Xi4lVUAR/3-stats-analysis-with-crossfilter" class="inline-object action-card">stats/analysis with crossfilter</a>.</div>
+							<p class="phenom-meta quiet"> <span class="date js-hide-on-sending" dt="2014-01-21T02:12:19.976Z" title="1/20/2014 8:12:13 PM">Jan 20 at 8:12 pm</span>  <span class="js-spinner hide"><span class="spinner small left" style="margin-right: 4px;"></span> Sending?</span>
+                                                        <span
+		                                                        class="js-hide-on-sending"></span>
+							</p>
+						</div>
+						<div class="phenom clearfix">
+							<div class="creator member js-show-mem-menu">
+								<img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)" title="johntday (johntday)"> <span class="member-gold-badge" title="This member has Trello Gold."></span>
+							</div>
+							<div class="phenom-desc"> <a class="inline-object js-show-mem-menu" href="https://trello.com/51788b9f1c5644984a0075c9">johntday</a> added <a href="https://trello.com/c/M3ZZ5j0X/24-reputation-profile-like-stackoverflow" class="inline-object action-card">Reputation / profile like stackoverflow</a> to
+								Ideas.</div>
+							<p class="phenom-meta quiet"> <span class="date js-hide-on-sending" dt="2014-01-13T04:10:08.225Z" title="1/12/2014 10:10:01 PM">Jan 12 at 10:10 pm</span>  <span class="js-spinner hide"><span class="spinner small left" style="margin-right: 4px;"></span> Sending?</span>
+                                                        <span
+		                                                        class="js-hide-on-sending"></span>
+							</p>
+						</div>
+						<div class="phenom clearfix">
+							<div class="creator member js-show-mem-menu">
+								<img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)" title="johntday (johntday)"> <span class="member-gold-badge" title="This member has Trello Gold."></span>
+							</div>
+							<div class="phenom-desc"> <a class="inline-object js-show-mem-menu" href="https://trello.com/51788b9f1c5644984a0075c9">johntday</a> added <a href="https://trello.com/c/Z6WcN15S/23-meteor-packages" class="inline-object action-card">Meteor Packages</a> to
+								Ideas and added Checklist.</div>
+							<p class="phenom-meta quiet"> <span class="date js-hide-on-sending" dt="2014-01-12T22:16:43.509Z" title="1/12/2014 4:16:36 PM">Jan 12 at 4:16 pm</span>  <span class="js-spinner hide"><span class="spinner small left" style="margin-right: 4px;"></span> Sending?</span>
+                                                        <span
+		                                                        class="js-hide-on-sending"></span>
+							</p>
+						</div>
+						<div class="phenom clearfix">
+							<div class="creator member js-show-mem-menu">
+								<img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)" title="johntday (johntday)"> <span class="member-gold-badge" title="This member has Trello Gold."></span>
+							</div>
+							<div class="phenom-desc"> <a class="inline-object js-show-mem-menu" href="https://trello.com/51788b9f1c5644984a0075c9">johntday</a> archived meteor packages.</div>
+							<p class="phenom-meta quiet"> <span class="date js-hide-on-sending" dt="2014-01-12T22:16:24.800Z" title="1/12/2014 4:16:18 PM">Jan 12 at 4:16 pm</span>  <span class="js-spinner hide"><span class="spinner small left" style="margin-right: 4px;"></span> Sending?</span>
+                                                        <span
+		                                                        class="js-hide-on-sending"></span>
+							</p>
+						</div>
+						<div class="phenom clearfix">
+							<div class="creator member js-show-mem-menu">
+								<img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)" title="johntday (johntday)"> <span class="member-gold-badge" title="This member has Trello Gold."></span>
+							</div>
+							<div class="phenom-desc"> <a class="inline-object js-show-mem-menu" href="https://trello.com/51788b9f1c5644984a0075c9">johntday</a> added <a href="https://trello.com/c/UWS1ncCG/22-https-github-com-spendflow-meteor-jquery-autosize"
+							                                                                                                                                             class="inline-object action-card">https://github.com/spendflow/meteor-jquery-autosize</a> to meteor packages.</div>
+							<p class="phenom-meta quiet"> <span class="date js-hide-on-sending" dt="2014-01-12T22:16:05.539Z" title="1/12/2014 4:15:58 PM">Jan 12 at 4:15 pm</span>  <span class="js-spinner hide"><span class="spinner small left" style="margin-right: 4px;"></span> Sending?</span>
+                                                        <span
+		                                                        class="js-hide-on-sending"></span>
+							</p>
+						</div>
+						<div class="phenom clearfix">
+							<div class="creator member js-show-mem-menu">
+								<img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)" title="johntday (johntday)"> <span class="member-gold-badge" title="This member has Trello Gold."></span>
+							</div>
+							<div class="phenom-desc"> <a class="inline-object js-show-mem-menu" href="https://trello.com/51788b9f1c5644984a0075c9">johntday</a> added <a href="https://trello.com/c/SBS5HmM9/21-dropbox-integration" class="inline-object action-card">DropBox integration</a> to
+								Ideas and added Checklist.</div>
+							<p class="phenom-meta quiet"> <span class="date js-hide-on-sending" dt="2014-01-12T20:29:59.350Z" title="1/12/2014 2:29:52 PM">Jan 12 at 2:29 pm</span>  <span class="js-spinner hide"><span class="spinner small left" style="margin-right: 4px;"></span> Sending?</span>
+                                                        <span
+		                                                        class="js-hide-on-sending"></span>
+							</p>
+						</div>
+						<div class="phenom clearfix">
+							<div class="creator member js-show-mem-menu">
+								<img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)" title="johntday (johntday)"> <span class="member-gold-badge" title="This member has Trello Gold."></span>
+							</div>
+							<div class="phenom-desc">
+								<a class="inline-object js-show-mem-menu" href="https://trello.com/51788b9f1c5644984a0075c9">johntday</a> on <a href="https://trello.com/c/x9ib5lz5/20-visio-integration" class="inline-object action-card">Visio integration</a>
+								<div class="action-comment markeddown">
+									<p>Here is my jsfiddle as prototype:</p>
+									<p><a href="http://jsfiddle.net/johntday/m9BPJ/18/" target="_blank">http://jsfiddle.net/johntday/m9BPJ/18/</a>
+									</p>
+								</div>
+							</div>
+							<p class="phenom-meta quiet"> <span class="date js-hide-on-sending" dt="2014-01-11T00:41:56.485Z" title="1/10/2014 6:41:49 PM">Jan 10 at 6:41 pm</span>  <span class="js-spinner hide"><span class="spinner small left" style="margin-right: 4px;"></span> Sending?</span>
+                                                        <span
+		                                                        class="js-hide-on-sending"></span>
+							</p>
+						</div>
+					</div>
+					<a class="show-more js-view-all-activity-list" href="https://trello.com/b/jX1VpidH/tdocs#"> View all activity? </a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="sidebar-archive-dropzone js-sidebar-archive-dropzone">
+	<p>Drop here to archive.</p>
+</div>
+</div>
+</div>
+<div class="board-canvas" style="height:{{board_canvas_height}}px;">
+<div id="board" class="clearfix">
+<div class="list-area-wrapper fancy-scrollbar">
+<div class="list-area  js-list-sortable  js-no-higher-edits clearfix ui-sortable" style="width: 1074px;">
+<div class="list">
+<div class="list-header js-list-header non-empty clearfix editable" attr="name">
+	<h2 class="list-header-name hide-on-edit js-list-name current">Ideas</h2>
+	<p class="list-header-num-cards hide js-num-cards">19 cards</p>
+	<span class="list-header-subscribe-icon icon-sm icon-follow js-list-subscribed hide"></span>
+	<div class="edit edit-heavy clearfix">
+		<textarea type="text" class="field single-line"></textarea>
+	</div>
+	<a href="https://trello.com/b/jX1VpidH/tdocs#" class="list-header-menu-icon icon-sm icon-menu dark-hover js-open-list-menu"></a>
+</div>
+<div class="list-cards fancy-scrollbar clearfix js-list-cards js-sortable ui-sortable" style="max-height:{{list_cards_max_height}}px;">
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-blue"></span>
+	</div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/Xi4lVUAR/3-stats-analysis-with-crossfilter" class="list-card-title clear js-card-name"><span class="card-short-id hide">#3 </span>stats/analysis with crossfilter</a>
+		<div class="badges">
+			<div title="You are subscribed to this card." class="badge badge-state-image-only"><span class="badge-icon icon-sm icon-follow"></span>
+			</div>
+			<div title="This card has 1 comment." class="badge"><span class="badge-icon icon-sm icon-comment"></span>  <span class="badge-text">1</span>
+			</div>
+			<div title="This card has 0 of 2 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>  <span class="badge-text">0/2</span>
+			</div>
+		</div>
+		<div class="list-card-members js-list-card-members">
+			<div class="member js-member-on-card-menu" data-idmem="51788b9f1c5644984a0075c9">
+				<img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)" title="johntday (johntday)"> <span class="member-gold-badge" title="This member has Trello Gold."></span>
+			</div>
+		</div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable active-card"><!--???-->
+	<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-blue"></span>
+	</div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/6QxOKqBT/5-diagram-component" class="list-card-title clear js-card-name"><span class="card-short-id hide">#5 </span>Diagram: component</a>
+		<div class="badges">
+			<div title="This card has a description." class="badge badge-state-image-only"><span class="badge-icon icon-sm icon-edit"></span>
+			</div>
+			<div title="This card has 0 of 16 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>  <span class="badge-text">0/16</span>
+			</div>
+		</div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-blue"></span>
+	</div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/U6raDc6a/6-diagram-context" class="list-card-title clear js-card-name"><span class="card-short-id hide">#6 </span>Diagram: context</a>
+		<div class="badges"></div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-blue"></span>
+	</div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/eHr3ZUlu/7-diagram-interface" class="list-card-title clear js-card-name"><span class="card-short-id hide">#7 </span>Diagram: interface</a>
+		<div class="badges">
+			<div title="This card has a description." class="badge badge-state-image-only"><span class="badge-icon icon-sm icon-edit"></span>
+			</div>
+		</div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-green"></span>
+	</div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/rNcGxocd/8-model-data-model" class="list-card-title clear js-card-name"><span class="card-short-id hide">#8 </span>Model: data model</a>
+		<div class="badges"></div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-blue"></span>
+	</div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/cU8DVf5Z/10-flowchart" class="list-card-title clear js-card-name"><span class="card-short-id hide">#10 </span>flowchart</a>
+		<div class="badges">
+			<div title="This card has 0 of 2 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>  <span class="badge-text">0/2</span>
+			</div>
+		</div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-purple"></span>
+	</div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/OidKXCII/11-common-tagging-widget" class="list-card-title clear js-card-name"><span class="card-short-id hide">#11 </span>common tagging widget</a>
+		<div class="badges"></div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-purple"></span>
+	</div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/cYcxKHAX/12-common-type-ahead-widget" class="list-card-title clear js-card-name"><span class="card-short-id hide">#12 </span>common type-ahead widget</a>
+		<div class="badges">
+			<div title="This card has 0 of 2 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>  <span class="badge-text">0/2</span>
+			</div>
+		</div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-purple"></span>
+	</div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/EA2A3wc0/13-enable-users-to-edit-diagram-at-same-time" class="list-card-title clear js-card-name"><span class="card-short-id hide">#13 </span>Enable users to edit diagram at same time</a>
+		<div class="badges">
+			<div title="This card has 0 of 1 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>  <span class="badge-text">0/1</span>
+			</div>
+		</div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-purple"></span>
+	</div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/7VqBzzcL/14-advanced-search" class="list-card-title clear js-card-name"><span class="card-short-id hide">#14 </span>advanced search</a>
+		<div class="badges">
+			<div title="This card has 0 of 2 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>  <span class="badge-text">0/2</span>
+			</div>
+		</div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-blue"></span>
+	</div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/wZIFbyP5/15-ttable" class="list-card-title clear js-card-name"><span class="card-short-id hide">#15 </span>Ttable</a>
+		<div class="badges">
+			<div title="This card has a description." class="badge badge-state-image-only"><span class="badge-icon icon-sm icon-edit"></span>
+			</div>
+			<div title="This card has 0 of 4 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>  <span class="badge-text">0/4</span>
+			</div>
+		</div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-yellow"></span>  <span class="card-label card-label-purple"></span>
+	</div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/OBDlDd7W/17-ui-forms" class="list-card-title clear js-card-name"><span class="card-short-id hide">#17 </span>UI: forms</a>
+		<div class="badges">
+			<div title="This card has 0 of 2 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>  <span class="badge-text">0/2</span>
+			</div>
+		</div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-purple"></span>
+	</div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/7ll7B09H/18-change-history" class="list-card-title clear js-card-name"><span class="card-short-id hide">#18 </span>Change history</a>
+		<div class="badges"></div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-red"></span>
+	</div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/Qxo4TQ7c/19-deploy" class="list-card-title clear js-card-name"><span class="card-short-id hide">#19 </span>Deploy</a>
+		<div class="badges">
+			<div title="This card has a description." class="badge badge-state-image-only"><span class="badge-icon icon-sm icon-edit"></span>
+			</div>
+			<div title="This card has 0 of 1 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>  <span class="badge-text">0/1</span>
+			</div>
+		</div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-blue"></span>
+	</div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/x9ib5lz5/20-visio-integration" class="list-card-title clear js-card-name"><span class="card-short-id hide">#20 </span>Visio integration</a>
+		<div class="badges">
+			<div title="This card has 1 comment." class="badge"><span class="badge-icon icon-sm icon-comment"></span>  <span class="badge-text">1</span>
+			</div>
+			<div title="This card has 0 of 3 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>  <span class="badge-text">0/3</span>
+			</div>
+		</div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-blue"></span>
+	</div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/SBS5HmM9/21-dropbox-integration" class="list-card-title clear js-card-name"><span class="card-short-id hide">#21 </span>DropBox integration</a>
+		<div class="badges">
+			<div title="This card has 0 of 1 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>  <span class="badge-text">0/1</span>
+			</div>
+		</div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"></div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/Z6WcN15S/23-meteor-packages" class="list-card-title clear js-card-name"><span class="card-short-id hide">#23 </span>Meteor Packages</a>
+		<div class="badges">
+			<div title="This card has 0 of 19 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>  <span class="badge-text">0/19</span>
+			</div>
+		</div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"></div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/M3ZZ5j0X/24-reputation-profile-like-stackoverflow" class="list-card-title clear js-card-name"><span class="card-short-id hide">#24 </span>Reputation / profile like stackoverflow</a>
+		<div class="badges"></div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+<div class="list-card js-member-droppable ui-droppable">
+	<div class="list-card-labels clearfix js-card-labels"></div>
+	<div class="list-card-cover js-card-cover hide"></div>
+	<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+	<div class="list-card-stickers-area clearfix hide">
+		<div class="stickers js-card-stickers"></div>
+	</div>
+	<div class="list-card-details clearfix">
+		<a href="https://trello.com/c/ubpXOMw1/25-ui-html-css" class="list-card-title clear js-card-name"><span class="card-short-id hide">#25 </span>UI: html/css</a>
+		<div class="badges">
+			<div title="This card has 0 of 5 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>  <span class="badge-text">0/5</span>
+			</div>
+		</div>
+		<div class="list-card-members js-list-card-members"></div>
+	</div>
+	<p class="list-card-dropzone">Drop files to upload.</p>
+</div>
+</div>
+<a class="open-card-composer js-open-card-composer" href="https://trello.com/b/jX1VpidH/tdocs#">Add a card?</a>
+</div>
+<div class="list">
+	<div class="list-header js-list-header non-empty clearfix editable" attr="name">
+		<h2 class="list-header-name hide-on-edit js-list-name current">To Do</h2>
+		<p class="list-header-num-cards hide js-num-cards">2 cards</p>
+		<span class="list-header-subscribe-icon icon-sm icon-follow js-list-subscribed hide"></span>
+		<div class="edit edit-heavy clearfix">
+			<textarea type="text" class="field single-line"></textarea>
+		</div>
+		<a href="https://trello.com/b/jX1VpidH/tdocs#" class="list-header-menu-icon icon-sm icon-menu dark-hover js-open-list-menu"></a>
+	</div>
+	<div class="list-cards fancy-scrollbar clearfix js-list-cards js-sortable ui-sortable" style="max-height:{{list_cards_max_height}}px;">
+		<div class="list-card js-member-droppable ui-droppable">
+			<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-blue"></span>
+			</div>
+			<div class="list-card-cover js-card-cover hide"></div>
+			<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+			<div class="list-card-stickers-area clearfix hide">
+				<div class="stickers js-card-stickers"></div>
+			</div>
+			<div class="list-card-details clearfix">
+				<a href="https://trello.com/c/DP9Ydndg/4-sequence-diagram" class="list-card-title clear js-card-name"><span class="card-short-id hide">#4 </span>Sequence diagram</a>
+				<div class="badges">
+					<div title="You are subscribed to this card." class="badge badge-state-image-only"><span class="badge-icon icon-sm icon-follow"></span>
+					</div>
+					<div title="This card has 1 comment." class="badge"><span class="badge-icon icon-sm icon-comment"></span>  <span class="badge-text">1</span>
+					</div>
+					<div title="This card has 1 of 2 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>  <span class="badge-text">1/2</span>
+					</div>
+				</div>
+				<div class="list-card-members js-list-card-members">
+					<div class="member js-member-on-card-menu" data-idmem="51788b9f1c5644984a0075c9">
+						<img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)" title="johntday (johntday)"> <span class="member-gold-badge" title="This member has Trello Gold."></span>
+					</div>
+				</div>
+			</div>
+			<p class="list-card-dropzone">Drop files to upload.</p>
+		</div>
+		<div class="list-card js-member-droppable ui-droppable">
+			<div class="list-card-labels clearfix js-card-labels"></div>
+			<div class="list-card-cover js-card-cover hide"></div>
+			<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+			<div class="list-card-stickers-area clearfix hide">
+				<div class="stickers js-card-stickers"></div>
+			</div>
+			<div class="list-card-details clearfix">
+				<a class="list-card-title clear js-card-name"><span class="card-short-id hide"># </span>leave</a>
+				<div class="badges">
+					<div title="This card has 0 of 1 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>  <span class="badge-text">0/1</span>
+					</div>
+				</div>
+				<div class="list-card-members js-list-card-members"></div>
+			</div>
+			<p class="list-card-dropzone">Drop files to upload.</p>
+		</div>
+		<div class="card-composer hide">
+			<div class="list-card js-composer" style="padding-bottom: 0px;">
+				<div class="list-card-labels clearfix js-list-card-composer-labels"></div>
+				<textarea class="list-card-composer-textarea js-card-title"></textarea>
+				<div class="list-card-members js-list-card-composer-members"></div>
+			</div>
+			<div class="cc-controls clearfix">
+				<input type="submit" class="primary confirm js-add-card" value="Add">
+				<a class="icon-lg icon-close dark-hover js-cancel" href="https://trello.com/b/jX1VpidH/tdocs#"></a>
+				<a class="cc-opt icon-lg icon-menu dark-hover js-cc-menu" href="https://trello.com/b/jX1VpidH/tdocs#"></a>
+			</div>
+		</div>
+	</div>
+	<a class="open-card-composer js-open-card-composer" href="https://trello.com/b/jX1VpidH/tdocs#">Add a card?</a>
+</div>
+<div class="list">
+	<div class="list-header js-list-header non-empty clearfix editable" attr="name">
+		<h2 class="list-header-name hide-on-edit js-list-name current">DONE</h2>
+		<p class="list-header-num-cards hide js-num-cards">2 cards</p>
+		<span class="list-header-subscribe-icon icon-sm icon-follow js-list-subscribed hide"></span>
+		<div class="edit edit-heavy clearfix">
+			<textarea type="text" class="field single-line"></textarea>
+		</div>
+		<a href="https://trello.com/b/jX1VpidH/tdocs#" class="list-header-menu-icon icon-sm icon-menu dark-hover js-open-list-menu"></a>
+	</div>
+	<div class="list-cards fancy-scrollbar clearfix js-list-cards js-sortable ui-sortable" style="max-height:{{list_cards_max_height}}px;">
+		<div class="list-card js-member-droppable ui-droppable">
+			<div class="list-card-labels clearfix js-card-labels"></div>
+			<div class="list-card-cover js-card-cover hide"></div>
+			<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+			<div class="list-card-stickers-area clearfix hide">
+				<div class="stickers js-card-stickers"></div>
+			</div>
+			<div class="list-card-details clearfix">
+				<a href="https://trello.com/c/vFyBpmdF/9-publish-app-baseline" class="list-card-title clear js-card-name"><span class="card-short-id hide">#9 </span>publish app baseline</a>
+				<div class="badges"></div>
+				<div class="list-card-members js-list-card-members"></div>
+			</div>
+			<p class="list-card-dropzone">Drop files to upload.</p>
+		</div>
+		<div class="list-card js-member-droppable ui-droppable">
+			<div class="list-card-labels clearfix js-card-labels"></div>
+			<div class="list-card-cover js-card-cover hide"></div>
+			<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+			<div class="list-card-stickers-area clearfix hide">
+				<div class="stickers js-card-stickers"></div>
+			</div>
+			<div class="list-card-details clearfix">
+				<a href="https://trello.com/c/6mQxDKKD/16-license" class="list-card-title clear js-card-name"><span class="card-short-id hide">#16 </span>License</a>
+				<div class="badges">
+					<div title="This card has 1 of 1 checklist items completed." class="badge badge-state-complete"><span class="badge-icon icon-sm icon-checklist"></span>  <span class="badge-text">1/1</span>
+					</div>
+				</div>
+				<div class="list-card-members js-list-card-members"></div>
+			</div>
+			<p class="list-card-dropzone">Drop files to upload.</p>
+		</div>
+	</div>
+	<a class="open-card-composer js-open-card-composer" href="https://trello.com/b/jX1VpidH/tdocs#">Add a card?</a>
+</div>
+<div class="list add-list idle">
+	<form>
+		<span class="placeholder js-open-add-list">Add a list?</span>
+		<input type="text" class="list-name-input" name="name" placeholder="Add a list?" autocomplete="off">
+		<div class="edit-controls keep clearfix">
+			<input type="submit" class="primary confirm js-save-edit" value="Save">
+			<a href="https://trello.com/b/jX1VpidH/tdocs#" class="icon-lg icon-close dark-hover cancel js-cancel-edit"></a>
+		</div>
+	</form>
+</div>
+<div class="version-tag"></div>
+</div>
+</div>
+<div class="bottom-archive-dropzone js-bottom-archive-dropzone"></div>
+</div>
+</div>
+</div>
+</div>
+<noscript class="big-message">&lt;h1&gt;To use Trello, please enable JavaScript.&lt;/h1&gt;</noscript>
+<div id="boards-drawer">
+	<div class="boards-drawer">
+		<div class="boards-drawer-header js-drawer-header">
+			<h3>Boards</h3>
+		</div>
+		<div class="board-drawer-content fancy-scrollbar" style="max-height:{{board_drawer_content_max_height}}px;">
+			<input type="text" class="js-search-boards" placeholder="Find boards by name?">
+			<div class="js-board-results-container hide">
+				<ul class="sidebar-boards-list js-board-results"></ul>
+			</div>
+			<div class="js-boards-list-container">
+				<div class="starred-sidebar-boards-list js-starred-boards">
+					<div class="hide">
+						<p class="sidebar-section-header quiet"> <span class="icon-sm icon-star"></span> Starred Boards</p>
+						<ul class="sidebar-boards-list js-board-list ui-sortable" style=""></ul>
+					</div>
+				</div>
+				<div class="js-recent-boards">
+					<div>
+						<p class="sidebar-section-header quiet"> <span class="icon-sm icon-clock"></span> Recent Boards</p>
+						<ul class="sidebar-boards-list js-board-list">
+							<li>
+								<a class="js-open-board highlight-icon    unknown" href="./trello_files/trello.html" style="  background-color: #23719F; "> <span class="thumbnail" style=" ; background-color: #23719F; "></span>  <span class="fade"></span>  <span class="details has-sub-name"> <span class="board-list-item-name" title="Tdocs">Tdocs</span>  <span class="board-list-item-sub-name"
+								                                                                                                                                                                                                                                                                                                                                         title="My Meteor">My Meteor</span>  <span class="unread-indicator js-unread" title="There is new activity on this board."></span>  <span class="icon-sm icon-star js-star-board" title="Click to star this board. It will show up at top of your boards list."></span> </span>
+								</a>
+							</li>
+							<li>
+								<a class="js-open-board highlight-icon    unknown" href="https://trello.com/b/FBVlQrXI/stuff" style="  background-color: #23719F; "> <span class="thumbnail" style=" ; background-color: #23719F; "></span>  <span class="fade"></span>  <span class="details has-sub-name"> <span class="board-list-item-name" title="Stuff">Stuff</span>  <span class="board-list-item-sub-name"
+								                                                                                                                                                                                                                                                                                                                                                  title="Personal">Personal</span>  <span class="unread-indicator js-unread" title="There is new activity on this board."></span>  <span class="icon-sm icon-star js-star-board" title="Click to star this board. It will show up at top of your boards list."></span> </span>
+								</a>
+							</li>
+							<li>
+								<a class="js-open-board highlight-icon    unknown" href="https://trello.com/b/UufDNj8m/to-dos" style="  background-color: #23719F; "> <span class="thumbnail" style=" ; background-color: #23719F; "></span>  <span class="fade"></span>  <span class="details"> <span class="board-list-item-name" title="To-Dos">To-Dos</span>  <span class="unread-indicator js-unread"
+								                                                                                                                                                                                                                                                                                                                                        title="There is new activity on this board."></span>  <span class="icon-sm icon-star js-star-board" title="Click to star this board. It will show up at top of your boards list."></span> </span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="js-all-boards">
+					<div class="">
+						<p class="sidebar-section-header quiet"> <span class="icon-sm icon-board"></span> My Boards</p>
+						<ul class="sidebar-boards-list js-board-list">
+							<li>
+								<a class="js-open-board highlight-icon    unknown" href="https://trello.com/b/UufDNj8m/to-dos" style="  background-color: #23719F; "> <span class="thumbnail" style=" ; background-color: #23719F; "></span>  <span class="fade"></span>  <span class="details"> <span class="board-list-item-name" title="To-Dos">To-Dos</span>  <span class="unread-indicator js-unread"
+								                                                                                                                                                                                                                                                                                                                                        title="There is new activity on this board."></span>  <span class="icon-sm icon-star js-star-board" title="Click to star this board. It will show up at top of your boards list."></span> </span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div>
+						<p class="sidebar-section-header quiet">
+							<a class="dark-hover" href="https://trello.com/3e23ed70b6c54d28a146aeb14c5e554d"> <span class="icon-sm icon-org">  </span>  <span class="sidebar-section-header-title">Personal</span>  <span class="icon-sm icon-briefcase icon-briefcase-bc-color hide js-has-business-class"></span>
+							</a>
+						</p>
+						<ul class="sidebar-boards-list js-board-list">
+							<li>
+								<a class="js-open-board highlight-icon    unknown" href="https://trello.com/b/FBVlQrXI/stuff" style="  background-color: #23719F; "> <span class="thumbnail" style=" ; background-color: #23719F; "></span>  <span class="fade"></span>  <span class="details"> <span class="board-list-item-name" title="Stuff">Stuff</span>  <span class="unread-indicator js-unread"
+								                                                                                                                                                                                                                                                                                                                                     title="There is new activity on this board."></span>  <span class="icon-sm icon-star js-star-board" title="Click to star this board. It will show up at top of your boards list."></span> </span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="">
+						<p class="sidebar-section-header quiet">
+							<a class="dark-hover" href="https://trello.com/mymeteor"> <span class="icon-sm icon-org">  </span>  <span class="sidebar-section-header-title">My Meteor</span>  <span class="icon-sm icon-briefcase icon-briefcase-bc-color hide js-has-business-class"></span>
+							</a>
+						</p>
+						<ul class="sidebar-boards-list js-board-list">
+							<li>
+								<a class="js-open-board highlight-icon    unknown" href="./trello_files/trello.html" style="  background-color: #23719F; "> <span class="thumbnail" style=" ; background-color: #23719F; "></span>  <span class="fade"></span>  <span class="details"> <span class="board-list-item-name" title="Tdocs">Tdocs</span>  <span class="unread-indicator js-unread"
+								                                                                                                                                                                                                                                                                                                                            title="There is new activity on this board."></span>  <span class="icon-sm icon-star js-star-board" title="Click to star this board. It will show up at top of your boards list."></span> </span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<a class="quiet-button js-show-important" href="https://trello.com/b/jX1VpidH/tdocs#"> Only show important boards. </a>  <a class="quiet-button hide js-show-all" href="https://trello.com/b/jX1VpidH/tdocs#"> Show all boards. </a>
+				<a
+						class="quiet-button js-pin" href="https://trello.com/b/jX1VpidH/tdocs#">Always keep this menu open.</a> <a class="quiet-button hide js-unpin" href="https://trello.com/b/jX1VpidH/tdocs#"> Don't keep this menu open. </a>  <a class="quiet-button js-open-closed-boards" href="https://trello.com/b/jX1VpidH/tdocs#"> See closed boards? </a>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="window-overlay">
+	<div class="window" style="left: 528px; top: 50px; display: none;">
+		<a class="focus-dummy" href="https://trello.com/b/jX1VpidH/tdocs#"></a>
+		<div class="window-wrapper clearfix" style="">
+			<div class="dialog-close-button">
+				<a class="icon-lg icon-close dark-hover js-close-window" href="https://trello.com/b/jX1VpidH/tdocs#" title="Close this dialog window."></a>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="pop-over clearfix fancy-scrollbar" style="left: 1036px; top: 317px; max-height: 834px; display: none;">
+	<div class="header clearfix">
+		<a class="back-btn js-back-view" href="https://trello.com/b/jX1VpidH/tdocs#" style="display: none;"> <span class="icon-sm icon-leftarrow"></span>
+		</a> <span class="header-title">Add Checklist</span>
+		<a class="close-btn js-close-popover" href="https://trello.com/b/jX1VpidH/tdocs#"> <span class="icon-sm icon-close"></span>
+		</a>
+	</div>
+	<div class="content clearfix" style=""></div>
+</div>
+
+<div class="pop-over clearfix fancy-scrollbar" style="left: 222px; top: 329px; max-height: 866px; display: none;">
+	<div class="header clearfix">
+		<a class="back-btn js-back-view" href="#" style="display: none;"> <span class="icon-sm icon-leftarrow"></span>
+		</a> <span class="header-title">Card Actions</span>
+		<a class="close-btn js-close-popover" href="#"> <span class="icon-sm icon-close"></span>
+		</a>
+	</div>
+	<div class="content clearfix" style="">
+		<div>
+			<ul class="pop-over-list">
+				<li> <a class="js-edit-labels" href="#">Labels…</a>
+				</li>
+				<li> <a class="js-change-card-members" href="#">Members…</a>
+				</li>
+				<li> <a class="js-due-date" href="#">Due Date…</a>
+				</li>
+				<li> <a class="js-move-card" href="#">Move…</a>
+				</li>
+				<li> <a class="js-subscribe highlight-icon" href="#">Subscribe</a>
+				</li>
+				<li> <a class="js-more" href="#">More Actions…</a>
+				</li>
+			</ul>
+			<hr>
+			<ul class="pop-over-list">
+				<li> <a class="js-archive-card" href="#">Archive</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+<div class="tooltip-container"></div>
+<div id="clipboard-container"></div>
+<a href="https://trello.com/b/jX1VpidH/tdocs#" class="sticker-edit-button js-edit-sticker" id="edit-sticker" style="display: none;"><span class="icon-sm icon-sticker"></span> <span class="text">Edit sticker.</span></a>
+
+<div id="staging" style="visibility: hidden; position: absolute; left: 0px; top: -100000px; width: 100%;"></div>
+
+</div>
+
+</template>
