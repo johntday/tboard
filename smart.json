@@ -1,3 +1,9 @@
 {
-  "packages": {}
+	"packages": {
+		"spin": {},
+		"mypaginator": {
+			"git": "https://github.com/johntday/meteor-mypaginator.git"
+		},
+		"moment": {}
+	}
 }

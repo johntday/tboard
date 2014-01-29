@@ -1,0 +1,32 @@
+<template name="tmpl_card">
+
+	<div class="list-card js-member-droppable ui-droppable">
+		<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-blue"></span>
+		</div>
+		<div class="list-card-cover js-card-cover hide"></div>
+		<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu"></span>
+		<div class="list-card-stickers-area clearfix hide">
+			<div class="stickers js-card-stickers"></div>
+		</div>
+		<div class="list-card-details clearfix">
+			<a href="#" class="list-card-title clear js-card-name"><span class="card-short-id hide">#4 </span>{{title}}</a>
+			<div class="badges">
+				<div title="You are subscribed to this card." class="badge badge-state-image-only"><span class="badge-icon icon-sm icon-follow"></span>
+				</div>
+				<div title="This card has 1 comment." class="badge"><span class="badge-icon icon-sm icon-comment"></span>  <span class="badge-text">1</span>
+				</div>
+				<div title="This card has 1 of 2 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>
+					<span class="badge-text">1/2</span>
+				</div>
+			</div>
+			<div class="list-card-members js-list-card-members">
+				<div class="member js-member-on-card-menu" data-idmem="51788b9f1c5644984a0075c9">
+					<img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)" title="johntday (johntday)">
+					<span class="member-gold-badge" title="This member has Trello Gold."></span>
+				</div>
+			</div>
+		</div>
+		<p class="list-card-dropzone">Drop files to upload.</p>
+	</div>
+
+</template>

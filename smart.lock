@@ -1,7 +1,30 @@
 {
   "meteor": {},
   "dependencies": {
-    "basePackages": {},
-    "packages": {}
+    "basePackages": {
+      "spin": {},
+      "mypaginator": {
+        "git": "https://github.com/johntday/meteor-mypaginator.git",
+        "branch": "master"
+      },
+      "moment": {}
+    },
+    "packages": {
+      "spin": {
+        "git": "https://github.com/SachaG/meteor-spin.git",
+        "tag": "v0.2.2",
+        "commit": "3f655f0016228e4195acc784c45d3e3a247dc39f"
+      },
+      "mypaginator": {
+        "git": "https://github.com/johntday/meteor-mypaginator.git",
+        "branch": "master",
+        "commit": "7626f423cc37b0aea4193b95a0b75be2f01f9fa8"
+      },
+      "moment": {
+        "git": "https://github.com/acreeger/meteor-moment.git",
+        "tag": "v2.5.1",
+        "commit": "8c9bc5d3fc96705057737cb9743d555417f6e551"
+      }
+    }
   }
 }

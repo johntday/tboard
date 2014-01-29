@@ -27,11 +27,14 @@ Template.tmpl_board.helpers({
 	collapseRightSideBarMenu: function() {
 		return collapseRightSideBarMenu();
 	}
-
-
 });
 /*------------------------------------------------------------------------------------------------------------------------------*/
 Template.tmpl_board.events({
+	'click #header .header-boards-button': function(e) {
+		e.preventDefault();
+		$('#boards-drawer .boards-drawer').toggleClass('show');
+		console.log( e.currentTarget );
+	},
 	'mouseenter .list-card': function(e) {
 		$(e.currentTarget).addClass('active-card');
 	},
@@ -48,10 +51,10 @@ Template.tmpl_board.events({
 		alert('"board-header-btn" CLICKED');
 		console.log( e.currentTarget );
 	},
-	'click .header-btn': function(e) {
-		alert('"header-btn" CLICKED');
-		console.log( e.currentTarget );
-	},
+//	'click .header-btn': function(e) {
+//		alert('"header-btn" CLICKED');
+//		console.log( e.currentTarget );
+//	},
 	'click .list-card-operation': function(e) {
 		alert('"list-card-operation" CLICKED');
 		console.log( e.currentTarget );
@@ -70,7 +73,7 @@ Template.tmpl_board.events({
 	},
 	'click .js-save-edit': function(e) {
 		e.preventDefault();
-		$( '.list.add-list').addClass('idle');
+		$('.list.add-list').addClass('idle');
 		alert('"js-save-edit" CLICKED');
 		console.log( e.currentTarget );
 	},
@@ -89,7 +92,6 @@ Template.tmpl_board.events({
 		alert('"list-card-details" CLICKED');
 		console.log( e.currentTarget );
 	}
-
 });
 /*------------------------------------------------------------------------------------------------------------------------------*/
 //Template.tmpl_board.rendered = function() {

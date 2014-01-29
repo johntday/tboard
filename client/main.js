@@ -3,6 +3,11 @@ Session.setDefault('hide_feedback', true);
 Session.setDefault('hide_board_wrapper', true);
 Session.setDefault('collapse_right_side_bar_menu', true);
 
+Session.setDefault('project_id', undefined);
+Session.setDefault('board_id', undefined);
+
+Session.setDefault('stack_sort', 'seq_int');
+
 resizeHeight();
 
 function resizeHeight() {
@@ -37,3 +42,31 @@ hideBoardWrapper = function() {
 collapseRightSideBarMenu = function() {
 	return Session.get('collapse_right_side_bar_menu') ? 'collapse' : '';
 };
+
+
+Meteor.subscribe('pubsub_projects');
+Meteor.subscribe('pubsub_boards');
+//Meteor.subscribe('pubsub_stacks');
+//Meteor.subscribe('pubsub_cards');
+
+Session.set('project_id', '9K9zxCmh77m4xuxBF');
+board_id = 'w9MWBZCGzsxhQ5Tsw';
+
+
+
+stackListSubscription = function(find, options, per_page) {
+	var handle = Meteor.subscribeWithPagination('pubsub_stacks', find, options, per_page);
+	handle.fetch = function() {
+		var ourFind = _.isFunction(find) ? find() : find;
+		return limitDocuments(Stacks.find(ourFind, options), handle.loaded());
+	}
+	return handle;
+};
+Deps.autorun(function(){
+	stacksHandle = stackListSubscription(
+		stackQuery( board_id ),
+		stackSort[ Session.get('stack_sort') ],
+		100
+	);
+});
+
