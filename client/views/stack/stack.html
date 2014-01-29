@@ -1,15 +1,4 @@
 <template name="tmpl_stack_list">
-	<div class="list">
-		<div class="list-header js-list-header non-empty clearfix editable" attr="name">
-			<h2 class="list-header-name hide-on-edit js-list-name current">To Do</h2>
-			<p class="list-header-num-cards hide js-num-cards">2 cards</p>
-			<span class="list-header-subscribe-icon icon-sm icon-follow js-list-subscribed hide"></span>
-			<div class="edit edit-heavy clearfix">
-				<textarea type="text" class="field single-line"></textarea>
-			</div>
-			<a href="#" class="list-header-menu-icon icon-sm icon-menu dark-hover js-open-list-menu"></a>
-		</div>
-		<div class="list-cards fancy-scrollbar clearfix js-list-cards js-sortable ui-sortable" style="max-height:{{list_cards_max_height}}px;">
 
 		{{#each records}}
 			{{> tmpl_card}}
@@ -23,7 +12,24 @@
 			<div>{{> spinner}}</div>
 		{{/if}}
 
-		<div class="card-composer hide">
+</template>
+
+<template name="tmpl_stack">
+	<div class="list">
+		<div class="list-header js-list-header non-empty clearfix editable" attr="name">
+			<h2 class="list-header-name hide-on-edit js-list-name current">To Do</h2>
+			<p class="list-header-num-cards hide js-num-cards">2 cards</p>
+			<span class="list-header-subscribe-icon icon-sm icon-follow js-list-subscribed hide"></span>
+			<div class="edit edit-heavy clearfix">
+				<textarea type="text" class="field single-line"></textarea>
+			</div>
+			<a href="#" class="list-header-menu-icon icon-sm icon-menu dark-hover js-open-list-menu"></a>
+		</div>
+		<div class="list-cards fancy-scrollbar clearfix js-list-cards js-sortable ui-sortable" style="max-height:{{list_cards_max_height}}px;">
+
+			{{> tmpl_stack_list stacksHandle}}
+
+			<div class="card-composer hide">
 				<div class="list-card js-composer" style="padding-bottom: 0px;">
 					<div class="list-card-labels clearfix js-list-card-composer-labels"></div>
 					<textarea class="list-card-composer-textarea js-card-title"></textarea>
@@ -36,10 +42,7 @@
 				</div>
 			</div>
 		</div>
-		<a class="open-card-composer js-open-card-composer" href="#">Add a card?</a>
+		<a class="open-card-composer js-open-card-composer" data-stack-id="crap" href="#">Add a card?</a>
 	</div>
-</template>
 
-<template name="tmpl_stack">
-	{{> tmpl_stack_list stacksHandle}}
 </template>

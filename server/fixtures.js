@@ -29,7 +29,7 @@ Meteor.startup(function () {
 	}
 	function createStacks(board_id) {
 		var stackIds = [];
-		for (var i=0; i < 9; i++) {
+		for (var i=0; i < 3; i++) {
 			var board_id;
 			var stack = {
 				title:'my card stack '+i

@@ -3,8 +3,8 @@ Session.setDefault('hide_feedback', true);
 Session.setDefault('hide_board_wrapper', true);
 Session.setDefault('collapse_right_side_bar_menu', true);
 
-Session.setDefault('project_id', undefined);
-Session.setDefault('board_id', undefined);
+Session.setDefault('project_id', '');
+Session.setDefault('board_id', '');
 
 Session.setDefault('stack_sort', 'seq_int');
 
@@ -44,15 +44,46 @@ collapseRightSideBarMenu = function() {
 };
 
 
-Meteor.subscribe('pubsub_projects');
-Meteor.subscribe('pubsub_boards');
+//Meteor.subscribe('pubsub_projects');
+//Meteor.subscribe('pubsub_boards');
 //Meteor.subscribe('pubsub_stacks');
 //Meteor.subscribe('pubsub_cards');
 
-Session.set('project_id', '9K9zxCmh77m4xuxBF');
-board_id = 'w9MWBZCGzsxhQ5Tsw';
+//Session.set('project_id', '9K9zxCmh77m4xuxBF');
+//Session.set('board_id', 'w9MWBZCGzsxhQ5Tsw');
 
 
+projectListSubscription = function(find, options, per_page) {
+	var handle = Meteor.subscribeWithPagination('pubsub_projects', find, options, per_page);
+	handle.fetch = function() {
+		var ourFind = _.isFunction(find) ? find() : find;
+		return limitDocuments(Projects.find(ourFind, options), handle.loaded());
+	}
+	return handle;
+};
+Deps.autorun(function(){
+	projectsHandle = projectListSubscription(
+		projectQuery( '???' ),
+		projectSort[ Session.get('project_sort') ],
+		100
+	);
+});
+
+boardListSubscription = function(find, options, per_page) {
+	var handle = Meteor.subscribeWithPagination('pubsub_boards', find, options, per_page);
+	handle.fetch = function() {
+		var ourFind = _.isFunction(find) ? find() : find;
+		return limitDocuments(Boards.find(ourFind, options), handle.loaded());
+	}
+	return handle;
+};
+Deps.autorun(function(){
+	boardsHandle = boardListSubscription(
+		boardQuery( Session.get('project_id') ),
+		boardSort[ Session.get('board_sort') ],
+		100
+	);
+});
 
 stackListSubscription = function(find, options, per_page) {
 	var handle = Meteor.subscribeWithPagination('pubsub_stacks', find, options, per_page);
@@ -64,7 +95,7 @@ stackListSubscription = function(find, options, per_page) {
 };
 Deps.autorun(function(){
 	stacksHandle = stackListSubscription(
-		stackQuery( board_id ),
+		stackQuery( Session.get('board_id') ),
 		stackSort[ Session.get('stack_sort') ],
 		100
 	);

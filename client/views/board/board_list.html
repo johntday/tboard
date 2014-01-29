@@ -1,0 +1,108 @@
+<template name="tmpl_boards_list">
+
+	{{#each records}}
+		{{> tmpl_boards_list_detail}}
+	{{/each}}
+
+	{{#if ready}}
+		{{#unless allLoaded}}
+			<a class="load-more" href="#">Load more</a>
+		{{/unless}}
+	{{else}}
+		<div>{{> spinner}}</div>
+	{{/if}}
+
+</template>
+
+<template name="tmpl_boards">
+	<div class="js-boards-list-container">
+		<div class="">
+			<p class="sidebar-section-header quiet"> <span class="icon-sm icon-board"></span> My Boards</p>
+			<ul class="sidebar-boards-list js-board-list">
+
+			{{> tmpl_boards_list boardsHandle}}
+
+			</ul>
+		</div>
+		<a class="quiet-button js-show-important" href="#"> Only show important boards. </a>  <a class="quiet-button hide js-show-all" href="#"> Show all boards. </a>
+		<a class="quiet-button js-pin" href="#">Always keep this menu open.</a> <a class="quiet-button hide js-unpin" href="#"> Don't keep this menu open. </a>
+		<a class="quiet-button js-open-closed-boards" href="#"> See closed boards? </a>
+	</div>
+
+</template>
+
+
+<!--
+<div class="js-boards-list-container">
+		<div class="starred-sidebar-boards-list js-starred-boards">
+			<div class="hide">
+				<p class="sidebar-section-header quiet"> <span class="icon-sm icon-star"></span> Starred Boards</p>
+				<ul class="sidebar-boards-list js-board-list ui-sortable" style=""></ul>
+			</div>
+		</div>
+		<div class="js-recent-boards">
+			<div>
+				<p class="sidebar-section-header quiet"> <span class="icon-sm icon-clock"></span> Recent Boards</p>
+				<ul class="sidebar-boards-list js-board-list">
+					<li>
+						<a class="js-open-board highlight-icon    unknown" href="./trello_files/trello.html" style="  background-color: #23719F; "> <span class="thumbnail" style=" ; background-color: #23719F; "></span>  <span class="fade"></span>  <span class="details has-sub-name"> <span class="board-list-item-name" title="Tdocs">Tdocs</span>  <span class="board-list-item-sub-name"
+						                                                                                                                                                                                                                                                                                                                                         title="My Meteor">My Meteor</span>  <span class="unread-indicator js-unread" title="There is new activity on this board."></span>  <span class="icon-sm icon-star js-star-board" title="Click to star this board. It will show up at top of your boards list."></span> </span>
+						</a>
+					</li>
+					<li>
+						<a class="js-open-board highlight-icon    unknown" href="https://trello.com/b/FBVlQrXI/stuff" style="  background-color: #23719F; "> <span class="thumbnail" style=" ; background-color: #23719F; "></span>  <span class="fade"></span>  <span class="details has-sub-name"> <span class="board-list-item-name" title="Stuff">Stuff</span>  <span class="board-list-item-sub-name"
+						                                                                                                                                                                                                                                                                                                                                                  title="Personal">Personal</span>  <span class="unread-indicator js-unread" title="There is new activity on this board."></span>  <span class="icon-sm icon-star js-star-board" title="Click to star this board. It will show up at top of your boards list."></span> </span>
+						</a>
+					</li>
+					<li>
+						<a class="js-open-board highlight-icon    unknown" href="https://trello.com/b/UufDNj8m/to-dos" style="  background-color: #23719F; "> <span class="thumbnail" style=" ; background-color: #23719F; "></span>  <span class="fade"></span>  <span class="details"> <span class="board-list-item-name" title="To-Dos">To-Dos</span>  <span class="unread-indicator js-unread"
+						                                                                                                                                                                                                                                                                                                                                        title="There is new activity on this board."></span>  <span class="icon-sm icon-star js-star-board" title="Click to star this board. It will show up at top of your boards list."></span> </span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="js-all-boards">
+			<div class="">
+				<p class="sidebar-section-header quiet"> <span class="icon-sm icon-board"></span> My Boards</p>
+				<ul class="sidebar-boards-list js-board-list">
+					<li>
+						<a class="js-open-board highlight-icon    unknown" href="https://trello.com/b/UufDNj8m/to-dos" style="  background-color: #23719F; "> <span class="thumbnail" style=" ; background-color: #23719F; "></span>  <span class="fade"></span>  <span class="details"> <span class="board-list-item-name" title="To-Dos">To-Dos</span>  <span class="unread-indicator js-unread"
+						                                                                                                                                                                                                                                                                                                                                        title="There is new activity on this board."></span>  <span class="icon-sm icon-star js-star-board" title="Click to star this board. It will show up at top of your boards list."></span> </span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<p class="sidebar-section-header quiet">
+					<a class="dark-hover" href="https://trello.com/3e23ed70b6c54d28a146aeb14c5e554d"> <span class="icon-sm icon-org">  </span>  <span class="sidebar-section-header-title">Personal</span>  <span class="icon-sm icon-briefcase icon-briefcase-bc-color hide js-has-business-class"></span>
+					</a>
+				</p>
+				<ul class="sidebar-boards-list js-board-list">
+					<li>
+						<a class="js-open-board highlight-icon    unknown" href="https://trello.com/b/FBVlQrXI/stuff" style="  background-color: #23719F; "> <span class="thumbnail" style=" ; background-color: #23719F; "></span>  <span class="fade"></span>  <span class="details"> <span class="board-list-item-name" title="Stuff">Stuff</span>  <span class="unread-indicator js-unread"
+						                                                                                                                                                                                                                                                                                                                                     title="There is new activity on this board."></span>  <span class="icon-sm icon-star js-star-board" title="Click to star this board. It will show up at top of your boards list."></span> </span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="">
+				<p class="sidebar-section-header quiet">
+					<a class="dark-hover" href="https://trello.com/mymeteor"> <span class="icon-sm icon-org">  </span>  <span class="sidebar-section-header-title">My Meteor</span>  <span class="icon-sm icon-briefcase icon-briefcase-bc-color hide js-has-business-class"></span>
+					</a>
+				</p>
+				<ul class="sidebar-boards-list js-board-list">
+					<li>
+						<a class="js-open-board highlight-icon    unknown" href="./trello_files/trello.html" style="  background-color: #23719F; "> <span class="thumbnail" style=" ; background-color: #23719F; "></span>  <span class="fade"></span>  <span class="details"> <span class="board-list-item-name" title="Tdocs">Tdocs</span>  <span class="unread-indicator js-unread"
+						                                                                                                                                                                                                                                                                                                                            title="There is new activity on this board."></span>  <span class="icon-sm icon-star js-star-board" title="Click to star this board. It will show up at top of your boards list."></span> </span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<a class="quiet-button js-show-important" href="#"> Only show important boards. </a>  <a class="quiet-button hide js-show-all" href="#"> Show all boards. </a>
+		<a
+				class="quiet-button js-pin" href="#">Always keep this menu open.</a> <a class="quiet-button hide js-unpin" href="#"> Don't keep this menu open. </a>  <a class="quiet-button js-open-closed-boards" href="#"> See closed boards? </a>
+	</div>
+
+-->

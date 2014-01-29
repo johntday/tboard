@@ -77,11 +77,6 @@ Template.tmpl_board.events({
 		alert('"js-save-edit" CLICKED');
 		console.log( e.currentTarget );
 	},
-	'click .open-card-composer': function(e) {
-		e.preventDefault();
-		alert('"open-card-composer" CLICKED');
-		console.log( e.currentTarget );
-	},
 	'click .list-header': function(e) {
 		e.preventDefault();
 		alert('"list-header" CLICKED');

@@ -1,19 +1,10 @@
-Template.tmpl_stack.helpers({
-	list_cards_max_height: function() {
-		return Session.get('list_cards_max_height');
-	},
-	stacksHandle: function() {
-		return stacksHandle;
+Template.tmpl_boards.helpers({
+	boardsHandle: function() {
+		return boardsHandle;
 	}
 });
 /*------------------------------------------------------------------------------------------------------------------------------*/
-Template.tmpl_stack.events({
-	'click .open-card-composer': function(e) {
-		e.preventDefault();
-		var stack_id = $(e.currentTarget).data('stackId');
-		alert('"open-card-composer" CLICKED with stack_id=' + stack_id);
-		console.log( e.currentTarget );
-	}
+Template.tmpl_boards.events({
 });
 /*------------------------------------------------------------------------------------------------------------------------------*/
 //Template.tmpl_stack.rendered = function() {
@@ -23,7 +14,7 @@ Template.tmpl_stack.events({
 //
 //Template.tmpl_stack.destroyed = function() {
 //};
-Template.tmpl_stack_list.helpers({
+Template.tmpl_boards_list.helpers({
 	records: function() {
 		return this.fetch();
 	},
@@ -34,7 +25,7 @@ Template.tmpl_stack_list.helpers({
 		return ( this.fetch().length < this.loaded() );
 	}
 });
-Template.tmpl_stack_list.events({
+Template.tmpl_boards_list.events({
 	'click .load-more': function(e) {
 		e.preventDefault();
 		this.loadNextPage();
