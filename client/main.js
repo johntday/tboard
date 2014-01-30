@@ -2,9 +2,11 @@ Session.setDefault('woof_hide', true);
 Session.setDefault('hide_feedback', true);
 Session.setDefault('hide_board_wrapper', true);
 Session.setDefault('collapse_right_side_bar_menu', true);
+Session.setDefault('card_actions_pop_up', true);
 
 Session.setDefault('project_id', '');
-Session.setDefault('board_id', 'w9MWBZCGzsxhQ5Tsw');
+Session.setDefault('board_id', 'Cdyh4RYkHotHE6vYP');
+Session.setDefault('card_id', '');
 
 Session.setDefault('stack_sort', 'seq_int');
 
@@ -42,6 +44,10 @@ hideBoardWrapper = function() {
 collapseRightSideBarMenu = function() {
 	return Session.get('collapse_right_side_bar_menu') ? 'collapse' : '';
 };
+cardActionsPopUp = function() {
+	return Session.get('card_actions_pop_up') ? 'none' : 'block';
+}
+
 
 
 //Meteor.subscribe('pubsub_projects');

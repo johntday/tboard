@@ -28,31 +28,29 @@ Meteor.startup(function () {
 		}
 	}
 	function createStacks(board_id) {
-		var stackIds = [];
 		for (var i=0; i < 3; i++) {
-			var board_id;
+			var cardArray = getCardArray(i);
 			var stack = {
-				title:'my card stack '+i
+				title:'my stack '+i
 				,description:'my stack description '+i
 				,board_id:board_id
 				,seq_int:i
+				,cards:cardArray
 			};
 			var stack_id = Stacks.insert(stack);
-
-			createCards ( stack_id );
 		}
 	}
-	function createCards(project_id) {
-		for (var i=0; i < 20; i++) {
-			var stack_id;
+	function getCardArray(j) {
+		var cardArray = [];
+		for (var i=0; i < 8; i++) {
 			var card = {
 				title:'my card name '+i
-				,description:'my card description '+i
-				,stack_id:stack_id
+				,description:'card '+i+' for stack '+j
 				,seq_int:i
 			};
-			Cards.insert(card);
+			cardArray.push( card );
 		}
+		return cardArray;
 	}
 
 	// ADMIN

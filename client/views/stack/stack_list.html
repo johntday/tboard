@@ -1,7 +1,7 @@
 <template name="tmpl_stack_list">
 
 		{{#each records}}
-			{{> tmpl_card}}
+			{{> tmpl_stack_item}}
 		{{/each}}
 
 		{{#if ready}}
@@ -14,11 +14,19 @@
 
 </template>
 
-<template name="tmpl_stack">
+<template name="tmpl_stacks">
+
+			{{> tmpl_stack_list stacksHandle}}
+
+</template>
+
+<template name="tmpl_stack_item">
+
 	<div class="list">
 		<div class="list-header js-list-header non-empty clearfix editable" attr="name">
-			<h2 class="list-header-name hide-on-edit js-list-name current">To Do</h2>
-			<p class="list-header-num-cards hide js-num-cards">2 cards</p>
+			<h2 class="list-header-name hide-on-edit js-list-name current">{{title}}</h2>
+			<!--<p class="list-header-num-cards hide js-num-cards">2 cards</p>-->
+			<p class="list-header-num-cards js-num-cards">{{cards_cnt}} cards</p>
 			<span class="list-header-subscribe-icon icon-sm icon-follow js-list-subscribed hide"></span>
 			<div class="edit edit-heavy clearfix">
 				<textarea type="text" class="field single-line"></textarea>
@@ -27,22 +35,25 @@
 		</div>
 		<div class="list-cards fancy-scrollbar clearfix js-list-cards js-sortable ui-sortable" style="max-height:{{list_cards_max_height}}px;">
 
-			{{> tmpl_stack_list stacksHandle}}
+			<!-- cards list -->
+			{{#each cards}}
+				{{> tmpl_card}}
+			{{/each}}
 
-			<div class="card-composer hide">
+			<div class="card-composer hide" data-stack-id="{{_id}}"">
 				<div class="list-card js-composer" style="padding-bottom: 0px;">
 					<div class="list-card-labels clearfix js-list-card-composer-labels"></div>
 					<textarea class="list-card-composer-textarea js-card-title"></textarea>
 					<div class="list-card-members js-list-card-composer-members"></div>
 				</div>
 				<div class="cc-controls clearfix">
-					<input type="submit" class="primary confirm js-add-card" value="Add">
-					<a class="icon-lg icon-close dark-hover js-cancel" href="#"></a>
+					<input type="submit" class="primary confirm js-add-card" data-stack-id="{{_id}}" value="Add">
+					<a class="icon-lg icon-close dark-hover js-cancel" data-stack-id="{{_id}}" href="#"></a>
 					<a class="cc-opt icon-lg icon-menu dark-hover js-cc-menu" href="#"></a>
 				</div>
 			</div>
 		</div>
-		<a class="open-card-composer js-open-card-composer" data-stack-id="crap" href="#">Add a card?</a>
+		<a class="open-card-composer js-open-card-composer" data-stack-id="{{_id}}" href="#">Add a card?</a>
 	</div>
 
 </template>

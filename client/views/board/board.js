@@ -26,6 +26,9 @@ Template.tmpl_board.helpers({
 	},
 	collapseRightSideBarMenu: function() {
 		return collapseRightSideBarMenu();
+	},
+	card_actions_pop_up: function() {
+		return cardActionsPopUp();
 	}
 });
 /*------------------------------------------------------------------------------------------------------------------------------*/
@@ -55,10 +58,6 @@ Template.tmpl_board.events({
 //		alert('"header-btn" CLICKED');
 //		console.log( e.currentTarget );
 //	},
-	'click .list-card-operation': function(e) {
-		alert('"list-card-operation" CLICKED');
-		console.log( e.currentTarget );
-	},
 	'click .list-header-menu-icon': function(e) {
 		alert('"list-header-menu-icon" CLICKED');
 		console.log( e.currentTarget );
@@ -86,6 +85,11 @@ Template.tmpl_board.events({
 		e.preventDefault();
 		alert('"list-card-details" CLICKED');
 		console.log( e.currentTarget );
+	},
+	'click .js-close-popover': function(e) {
+		e.preventDefault();
+		// CLOSE ALL POPUPS
+		Session.set('card_actions_pop_up', true);
 	}
 });
 /*------------------------------------------------------------------------------------------------------------------------------*/
