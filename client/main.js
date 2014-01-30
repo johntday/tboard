@@ -4,7 +4,7 @@ Session.setDefault('hide_board_wrapper', true);
 Session.setDefault('collapse_right_side_bar_menu', true);
 
 Session.setDefault('project_id', '');
-Session.setDefault('board_id', '');
+Session.setDefault('board_id', 'w9MWBZCGzsxhQ5Tsw');
 
 Session.setDefault('stack_sort', 'seq_int');
 

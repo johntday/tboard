@@ -9,8 +9,6 @@ accounts-base
 accounts-ui
 accounts-password
 spin
-#iron-router
 underscore
 moment
 mypaginator
-#select2
