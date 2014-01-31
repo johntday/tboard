@@ -11,7 +11,7 @@ Stacks = new Meteor.Collection('stacks');
 Stacks.allow({
 	insert: function (userId, doc) {
 		//return ownsDocumentOrAdmin(userId, doc);
-		return false;
+		return true;
 	},
 	update: function (userId, doc, fields, modifier) {
 		return ownsDocumentOrAdmin(userId, doc);

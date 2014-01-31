@@ -1,3 +1,4 @@
+// INIT
 Session.setDefault('woof_hide', true);
 Session.setDefault('hide_feedback', true);
 Session.setDefault('hide_board_wrapper', true);
@@ -5,14 +6,18 @@ Session.setDefault('collapse_right_side_bar_menu', true);
 Session.setDefault('card_actions_pop_up', true);
 
 Session.setDefault('project_id', '');
-Session.setDefault('board_id', 'Cdyh4RYkHotHE6vYP');
+Session.setDefault('board_id', '');
 Session.setDefault('card_id', '');
+Session.setDefault('board', {});
 
 Session.setDefault('stack_sort', 'seq_int');
 
 Session.setDefault('stack_title_edit_id', '');
-Session.setDefault('card_edit_stack_id', '');
+Session.setDefault('card_edit_stack_id', {});
 
+stack_state = {card_cnts:[], stack_cnt:0};
+
+//-------------------------------------------------
 resizeHeight();
 
 function resizeHeight() {
@@ -110,3 +115,15 @@ Deps.autorun(function(){
 	);
 });
 
+Deps.autorun(function(){
+	//TODO: move me
+	if ( !Session.get('board_id') ) {
+		var board = Boards.findOne();
+		Session.set('board_id', board._id );
+		Session.set('board', board );
+	} else {
+		var board_id = Session.get('board_id');
+		var board = Boards.findOne(board_id);
+		Session.set('board', board );
+	}
+});

@@ -29,6 +29,14 @@ Template.tmpl_board.helpers({
 	},
 	card_actions_pop_up: function() {
 		return cardActionsPopUp();
+	},
+	boardTitle: function() {
+		var board = Session.get('board');
+		return (board) ? board.title : '';
+	},
+	boardDescription: function() {
+		var board = Session.get('board');
+		return (board) ? board.description : '';
 	}
 });
 /*------------------------------------------------------------------------------------------------------------------------------*/
@@ -89,18 +97,26 @@ Template.tmpl_board.events({
 	},
 	'click #delete-card': function(e) {
 		e.preventDefault();
-		var stack_id = Session.get('card_edit_stack_id');
-		console.log( 'deleted card_id: ' + stack_id );
-//		Stacks.update(stack_id,
-//			{
-//				$pull: { cards: user._id }
-//			}
-//		);		closeAllPopups();
+		var cardStack = Session.get('card_edit_stack_id');
+		console.log( 'deleted card_id: ' + cardStack );
+		Stacks.update(cardStack.stack_id,
+			{
+				$pull: { cards: {seq_int: cardStack.seq_int} }
+			}
+		);
+		closeAllPopups();
+	},
+	'click #add-new-stack': function(e) {
+		e.preventDefault();
+		var stack_int = stack_state.stack_cnt++;
+		var stack = { title:'Change me', stack_int:stack_int };
+		Stacks.insert( stack );
+		closeAllPopups();
 	}
 });
 /*------------------------------------------------------------------------------------------------------------------------------*/
 var closeAllPopups = function() {
-	Session.set('card_edit_stack_id', '');
+	Session.set('card_edit_stack_id', {});
 	Session.set('card_actions_pop_up', true);
 };
 /*------------------------------------------------------------------------------------------------------------------------------*/

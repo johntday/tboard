@@ -60,9 +60,11 @@
 
 			<div class="board-wrapper {{hideRightSideBar}}">
 				<div class="board-header clearfix js-board-header">
-					<a href="#" class="board-header-btn board-header-btn-name js-rename-board" title="Rename the board."> <span class="board-header-btn-text"> Tdocs </span>
+					<a href="#" class="board-header-btn board-header-btn-name js-rename-board" title="Rename the board."> <span class="board-header-btn-text"> {{boardTitle
+						}} </span>
 					</a>
-					<a href="#" class="board-header-btn board-header-btn-org-name js-org-name board-header-btn-without-icon" title="This board is part of the My Meteor organization"> <span class="board-header-btn-text">My Meteor</span>
+					<a href="#" class="board-header-btn board-header-btn-org-name js-org-name board-header-btn-without-icon"
+					   title="This board is part of the My Meteor organization"> <span class="board-header-btn-text">{{boardDescription}}</span>
 					</a>
 					<div class="board-header-btns left">
 						<a href="#" class="board-header-btn js-star-board board-header-btn-enabled"
@@ -101,10 +103,10 @@
 
 				<div class="list add-list idle">
 					<form>
-						<span class="placeholder js-open-add-list">Add a list?</span>
-						<input type="text" class="list-name-input" name="name" placeholder="Add a list?" autocomplete="off">
+						<span class="placeholder js-open-add-list">Add a stack?</span>
+						<input type="text" class="list-name-input" name="name" placeholder="Add a stack?" autocomplete="off">
 						<div class="edit-controls keep clearfix">
-							<input type="submit" class="primary confirm js-save-edit" value="Save">
+							<input type="submit" class="primary confirm js-save-edit" value="Save" id="add-new-stack">
 							<a href="#" class="icon-lg icon-close dark-hover cancel js-cancel-edit"></a>
 						</div>
 					</form>

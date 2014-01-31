@@ -1,11 +1,12 @@
 <template name="tmpl_card">
-
+	<!-- card -->
 	<div class="list-card js-member-droppable ui-droppable">
 		<div class="list-card-labels clearfix js-card-labels">
 			<span class="card-label card-label-blue"></span>
 		</div>
 		<div class="list-card-cover js-card-cover hide"></div>
-		<span class="list-card-operation icon-lg icon-menu dark-hover js-card-menu"></span>
+
+		<span class="list-card-operation icon-lg icon-menu dark-hover js-card-menu" data-seq-int="{{seq_int}}"></span>
 		<div class="list-card-stickers-area clearfix hide">
 			<div class="stickers js-card-stickers"></div>
 		</div>

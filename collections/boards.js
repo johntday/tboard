@@ -11,7 +11,7 @@ Boards = new Meteor.Collection('boards');
 Boards.allow({
 	insert: function (userId, doc) {
 		//return ownsDocumentOrAdmin(userId, doc);
-		return false;
+		return true;
 	},
 	update: function (userId, doc, fields, modifier) {
 		return ownsDocumentOrAdmin(userId, doc);

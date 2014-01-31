@@ -42,7 +42,7 @@ Meteor.startup(function () {
 	}
 	function getCardArray(j) {
 		var cardArray = [];
-		for (var i=0; i < 8; i++) {
+		for (var i=0; i < 4; i++) {
 			var card = {
 				title:'my card name '+i
 				,description:'card '+i+' for stack '+j
