@@ -4,18 +4,22 @@ Session.setDefault('hide_feedback', true);
 Session.setDefault('hide_board_wrapper', true);
 Session.setDefault('collapse_right_side_bar_menu', true);
 Session.setDefault('card_actions_pop_up', true);
+Session.setDefault('stack_actions_pop_up', true);
+Session.setDefault('create_board_pop_up', true);
 
 Session.setDefault('project_id', '');
 Session.setDefault('board_id', '');
 Session.setDefault('card_id', '');
-Session.setDefault('board', {});
+//Session.setDefault('board', {});
 
 Session.setDefault('stack_sort', 'seq_int');
 
 Session.setDefault('stack_title_edit_id', '');
 Session.setDefault('card_edit_stack_id', {});
+Session.setDefault('stack_options_stack_id','');
+Session.setDefault('width', 0);
 
-stack_state = {card_cnts:[], stack_cnt:0};
+stack_state = {card_cnts:{}, stack_cnt:0};
 
 //-------------------------------------------------
 resizeHeight();
@@ -23,13 +27,14 @@ resizeHeight();
 function resizeHeight() {
 	var height = $(window).height();
 	var width  = $(window).width();
+	Session.set('width', width);
 	//console.log( "width="+width );
 	//console.log( "height="+height );
 	Session.set('board_widgets_content_height', height-80);//height_200);//852      #1
 	Session.set('board_actions_list_height', height-280);//height_202);//650         #4
 
 	Session.set('board_canvas_height', height-110);//height_50);//802                 #2 do first
-	Session.set('list_area_width', 1074);
+	Session.set('list_area_width', width - stack_state.stack_cnt*30);
 	Session.set('list_cards_max_height', height-220);//height_117);//735             #3
 	Session.set('board_drawer_content_max_height', height-14);//height_14);//838
 }
@@ -54,7 +59,13 @@ collapseRightSideBarMenu = function() {
 };
 cardActionsPopUp = function() {
 	return Session.get('card_actions_pop_up') ? 'none' : 'block';
-}
+};
+stackActionsPopUp = function() {
+	return Session.get('stack_actions_pop_up') ? 'none' : 'block';
+};
+createBoard = function() {
+	return Session.get('create_board_pop_up') ? 'none' : 'block';
+};
 
 
 
@@ -113,17 +124,4 @@ Deps.autorun(function(){
 		stackSort[ Session.get('stack_sort') ],
 		100
 	);
-});
-
-Deps.autorun(function(){
-	//TODO: move me
-	if ( !Session.get('board_id') ) {
-		var board = Boards.findOne();
-		Session.set('board_id', board._id );
-		Session.set('board', board );
-	} else {
-		var board_id = Session.get('board_id');
-		var board = Boards.findOne(board_id);
-		Session.set('board', board );
-	}
 });

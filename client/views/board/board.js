@@ -30,13 +30,17 @@ Template.tmpl_board.helpers({
 	card_actions_pop_up: function() {
 		return cardActionsPopUp();
 	},
-	boardTitle: function() {
-		var board = Session.get('board');
-		return (board) ? board.title : '';
+	stack_actions_pop_up: function() {
+		return stackActionsPopUp();
 	},
-	boardDescription: function() {
-		var board = Session.get('board');
-		return (board) ? board.description : '';
+	isBoard: function() {
+		return !!Session.get('board_id');
+	},
+	createBoard: function() {
+		return createBoard();
+	},
+	width: function() {
+		return Session.get('width') / 2;
 	}
 });
 /*------------------------------------------------------------------------------------------------------------------------------*/
@@ -109,15 +113,47 @@ Template.tmpl_board.events({
 	'click #add-new-stack': function(e) {
 		e.preventDefault();
 		var stack_int = stack_state.stack_cnt++;
-		var stack = { title:'Change me', stack_int:stack_int };
+		var title = $(e.currentTarget).closest('form').find('input').val();
+		//$(e.currentTarget).closest('form').find('input').val('');
+		var stack = {
+			title: title
+			,description:''
+			,board_id: Session.get('board_id')
+			,stack_int:stack_int };
 		Stacks.insert( stack );
 		closeAllPopups();
+	},
+	'click #create-new-board': function(e) {
+		e.preventDefault();
+		var title = $('#boardNewTitle').val();
+		$('#boardNewTitle').val('');
+		var board = {
+			title: title
+		};
+		var board_id = Boards.insert( board );
+		closeAllPopups();
+		Router.go('/board/' + board_id);
+	},
+	'click #btn-create-new-board': function(e) {
+		e.preventDefault();
+		Session.set('create_board_pop_up', !Session.get('create_board_pop_up'));
+	},
+	'click #btn-delete-stack': function(e) {
+		e.preventDefault();
+		var stack_Id = Session.get('stack_options_stack_id');
+		console.log( stack_Id );
+		Stacks.remove( stack_Id );
+		Session.set('stack_actions_pop_up', !Session.get('stack_actions_pop_up'));
+		closeAllPopups();
 	}
+
 });
 /*------------------------------------------------------------------------------------------------------------------------------*/
 var closeAllPopups = function() {
 	Session.set('card_edit_stack_id', {});
 	Session.set('card_actions_pop_up', true);
+	Session.set('create_board_pop_up', true);
+	Session.set('stack_actions_pop_up', true);
 };
 /*------------------------------------------------------------------------------------------------------------------------------*/
 //Template.tmpl_board.rendered = function() {

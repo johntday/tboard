@@ -41,7 +41,7 @@
 					<a class="header-btn header-btn-feedback js-open-feedback {{hideFeedback}}"
 					   title="You are seeing an early, experimental version of Trello. We would love your feedback!" href="#"> <span class="header-btn-icon icon-lg icon-comment light"></span>  <span class="header-btn-text">Give us feedback.</span>
 					</a> <a class="header-btn hide upgrade" href="#"><span class="icon-sm icon-reopen light"></span><span class="header-btn-text">Update Available</span></a>
-					<a class="header-btn js-open-add-menu"
+					<a id="btn-create-new-board"class="header-btn js-open-add-menu"
 					   href="#" title="Add a new board or organization."> <span class="header-btn-icon icon-lg icon-add light"></span>
 					</a>
 					<a class="header-btn header-member js-open-header-member-menu" href="#"
@@ -58,13 +58,13 @@
 
 			<div id="content" class="clearfix">
 
+			{{#if isBoard}}
 			<div class="board-wrapper {{hideRightSideBar}}">
 				<div class="board-header clearfix js-board-header">
-					<a href="#" class="board-header-btn board-header-btn-name js-rename-board" title="Rename the board."> <span class="board-header-btn-text"> {{boardTitle
-						}} </span>
+					<a href="#" class="board-header-btn board-header-btn-name js-rename-board" title="Rename the board."> <span class="board-header-btn-text">{{title}}</span>
 					</a>
 					<a href="#" class="board-header-btn board-header-btn-org-name js-org-name board-header-btn-without-icon"
-					   title="This board is part of the My Meteor organization"> <span class="board-header-btn-text">{{boardDescription}}</span>
+					   title="This board is part of the My Meteor organization"> <span class="board-header-btn-text">{{description}}</span>
 					</a>
 					<div class="board-header-btns left">
 						<a href="#" class="board-header-btn js-star-board board-header-btn-enabled"
@@ -100,7 +100,7 @@
 				{{> tmpl_stacks}}
 
 
-
+				{{#if isBoard}}
 				<div class="list add-list idle">
 					<form>
 						<span class="placeholder js-open-add-list">Add a stack?</span>
@@ -111,6 +111,7 @@
 						</div>
 					</form>
 				</div>
+				{{/if}}
 				<div class="version-tag"></div>
 				</div>
 				</div>
@@ -119,7 +120,7 @@
 				</div>
 			</div>
 			</div>
-
+			{{/if}}
 			<noscript class="big-message">&lt;h1&gt;To use Tboard, you need to enable JavaScript&lt;/h1&gt;</noscript>
 			<div id="boards-drawer">
 				<div class="boards-drawer">
@@ -152,7 +153,7 @@
 		</div>
 
 		<!-- pop-over -->
-		<div class="pop-over clearfix fancy-scrollbar" style="left: 1036px; top: 317px; max-height: 834px; display: none;">
+		<div class="pop-over clearfix fancy-scrollbar" style="left:{{width}}px; top: 317px; max-height:{{list_cards_max_height}}px; display: none;">
 			<div class="header clearfix">
 				<a class="back-btn js-back-view" href="#" style="display: none;"> <span class="icon-sm icon-leftarrow"></span>
 				</a> <span class="header-title">Add Checklist</span>
@@ -162,8 +163,57 @@
 			<div class="content clearfix" style=""></div>
 		</div>
 
+		<!-- CREATE NEW BOARD -->
+		<div class="pop-over clearfix fancy-scrollbar" style="left:{{width}}px; top: 45px; max-height:{{list_cards_max_height}}px; display:{{createBoard}};">
+			<div class="header clearfix">
+				<a class="back-btn js-back-view" href="#" style="display: none;">
+					<span class="icon-sm icon-leftarrow"></span>
+				</a>
+				<span class="header-title">Create Board</span>
+				<a class="close-btn js-close-popover" href="#">
+					<span class="icon-sm icon-close"></span>
+				</a>
+			</div>
+			<div class="content clearfix" style="">
+				<div>
+					<form>
+						<label for="boardNewTitle">Title</label>
+						<input id="boardNewTitle" type="text" name="name" class="non-empty js-autofocus" placeholder="Untitled Board">
+						<input type="submit" class="primary wide js-submit" value="Create" id="create-new-board">
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!--pop over stack -->
+		<div class="pop-over clearfix fancy-scrollbar" style="left:{{width}}px; top: 115px; max-height:{{list_cards_max_height}}px; display:{{stack_actions_pop_up}};">
+			<div class="header clearfix"><a class="back-btn js-back-view" href="#" style="display: none;"> <span class="icon-sm icon-leftarrow"></span> </a> <span class="header-title">List Actions</span>
+				<a class="close-btn js-close-popover" href="#"> <span class="icon-sm icon-close"></span> </a></div>
+			<div class="content clearfix" style="">
+				<div>
+<!--
+					<ul class="pop-over-list">
+						<li><a class="js-add-card" href="#">Add Card…</a></li>
+						<li><a class="js-copy-list" href="#">Copy List…</a></li>
+						<li><a class="js-move-list" href="#">Move List…</a></li>
+						<li><a class="highlight-icon js-list-subscribe" href="#">Subscribe</a></li>
+					</ul>
+					<hr>
+					<ul class="pop-over-list">
+						<li><a class="js-move-cards" href="#">Move All Cards in This List…</a></li>
+						<li><a class="js-archive-cards" href="#">Archive All Cards in This List…</a></li>
+					</ul>
+					<hr>
+					-->
+					<ul class="pop-over-list">
+						<li><a id="btn-delete-stack" class="js-close-list" href="#">Delete this stack</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
 		<!-- pop-over CARD ACTIONS -->
-		<div class="pop-over clearfix fancy-scrollbar" style="left: 222px; top: 329px; max-height: 866px; display:{{card_actions_pop_up}};">
+		<div class="pop-over clearfix fancy-scrollbar" style="left:{{width}}px; top: 329px; max-height:{{list_cards_max_height}}px; display:{{card_actions_pop_up}};">
 			<div class="header clearfix">
 				<a class="back-btn js-back-view" href="#" style="display: none;"> <span class="icon-sm icon-leftarrow"></span>
 				</a> <span class="header-title">Card Actions</span>

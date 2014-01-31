@@ -12,11 +12,11 @@ Meteor.startup(function () {
 			};
 			project_id = Projects.insert(project);
 
-			createBoards( project_id );
+//			createBoards( project_id );
 		}
 	}
-	function createBoards(project_id) {
-		for (var i=0; i < 3; i++) {
+/*	function createBoards(project_id) {
+		for (var i=0; i < 1; i++) {
 			var board = {
 				title:'my board name '+i
 				,description:'my board description '+i
@@ -28,7 +28,7 @@ Meteor.startup(function () {
 		}
 	}
 	function createStacks(board_id) {
-		for (var i=0; i < 3; i++) {
+		for (var i=0; i < 4; i++) {
 			var cardArray = getCardArray(i);
 			var stack = {
 				title:'my stack '+i
@@ -51,7 +51,7 @@ Meteor.startup(function () {
 			cardArray.push( card );
 		}
 		return cardArray;
-	}
+	}*/
 
 	// ADMIN
 	var u = Meteor.users.findOne({username: "admin"}); // find the admin user

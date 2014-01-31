@@ -35,7 +35,8 @@ Template.tmpl_stack_item.helpers({
 		return this.cards;
 	},
 	cards_cnt: function() {
-		stack_state.card_cnts.push({stack_id: this._id, card_cnt: this.cards.length});
+		stack_state.card_cnts[ this._id ] = (this.cards) ? this.cards.length : 0;
+
 		return (this.cards) ? this.cards.length : 0;
 	},
 	isStackTitleEdit: function() {
@@ -76,12 +77,21 @@ Template.tmpl_stack_item.events({
 		e.preventDefault();
 		var stack_id = $(e.currentTarget).data('stackId');
 		var title = $('div.card-composer[data-stack-id='+stack_id+'] .js-card-title').val();
-		var seq_int = _.findWhere( stack_state.card_cnts, {stack_id: stack_id}).seq_int;
-		var card = {title: title, seq_int: 66};
+
+		stack_state.card_cnts[ this._id ] = (this.cards) ? this.cards.length : 0;
+
+		var seq_int = stack_state[ stack_id ];
+		var card = {title: title, seq_int: seq_int};
 		Stacks.update(stack_id, { $addToSet: { cards: card } } );
 		$('div.card-composer[data-stack-id='+stack_id+']').addClass('hide');
+	},
+	'click a.list-header-menu-icon': function(e) {
+		e.preventDefault();
+		console.log('hi');
+		var stack_id = $(e.currentTarget).closest('div.list').data('stackId');
+		Session.set('stack_options_stack_id',stack_id);
+		Session.set('stack_actions_pop_up', !Session.get('stack_actions_pop_up'));
 	}
-
 
 });
 /*------------------------------------------------------------------------------------------------------------------------------*/
