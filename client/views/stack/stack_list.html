@@ -22,11 +22,11 @@
 
 <template name="tmpl_stack_item">
 
-	<div class="list">
+	<div class="list" data-stack-id="{{_id}}">
 		<div class="list-header js-list-header non-empty clearfix editable {{#if isStackTitleEdit}}editing{{/if}}" attr="name">
 			<h2 class="list-header-name hide-on-edit js-list-name current" data-stack-id="{{_id}}">{{title}}</h2>
 			<p class="list-header-num-cards js-num-cards">{{cards_cnt}} cards</p>
-			<span class="list-header-subscribe-icon icon-sm icon-follow js-list-subscribed hide"></span>
+			<span class="list-header-subscribe-icon icon-lg icon-follow js-list-subscribed hide"></span>
 			<div class="edit edit-heavy clearfix">
 				<textarea type="text" class="field single-line" {{#if isStackTitleEdit}}style="height: 66px;"{{/if}}>{{title}}</textarea>
 				{{#if isStackTitleEdit}}
@@ -36,7 +36,7 @@
 				</div>
 				{{/if}}
 			</div>
-			<a href="#" class="list-header-menu-icon icon-sm icon-menu dark-hover js-open-list-menu"></a>
+			<a href="#" class="list-header-menu-icon icon-lg icon-menu dark-hover js-open-list-menu"></a>
 		</div>
 		<div class="list-cards fancy-scrollbar clearfix js-list-cards js-sortable ui-sortable" style="max-height:{{list_cards_max_height}}px;">
 

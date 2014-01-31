@@ -85,14 +85,24 @@ Template.tmpl_board.events({
 	'click .js-close-popover': function(e) {
 		e.preventDefault();
 		// CLOSE ALL POPUPS
-		Session.set('card_actions_pop_up', true);
+		closeAllPopups();
 	},
 	'click #delete-card': function(e) {
 		e.preventDefault();
-		// CLOSE ALL POPUPS
-		Session.set('card_actions_pop_up', true);
+		var stack_id = Session.get('card_edit_stack_id');
+		console.log( 'deleted card_id: ' + stack_id );
+//		Stacks.update(stack_id,
+//			{
+//				$pull: { cards: user._id }
+//			}
+//		);		closeAllPopups();
 	}
 });
+/*------------------------------------------------------------------------------------------------------------------------------*/
+var closeAllPopups = function() {
+	Session.set('card_edit_stack_id', '');
+	Session.set('card_actions_pop_up', true);
+};
 /*------------------------------------------------------------------------------------------------------------------------------*/
 //Template.tmpl_board.rendered = function() {
 //};

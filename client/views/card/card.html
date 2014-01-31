@@ -1,21 +1,27 @@
 <template name="tmpl_card">
 
 	<div class="list-card js-member-droppable ui-droppable">
-		<div class="list-card-labels clearfix js-card-labels"><span class="card-label card-label-blue"></span>
+		<div class="list-card-labels clearfix js-card-labels">
+			<span class="card-label card-label-blue"></span>
 		</div>
 		<div class="list-card-cover js-card-cover hide"></div>
-		<span class="list-card-operation icon-sm icon-menu dark-hover js-card-menu" data-card-id="{{_id}}"></span>
+		<span class="list-card-operation icon-lg icon-menu dark-hover js-card-menu"></span>
 		<div class="list-card-stickers-area clearfix hide">
 			<div class="stickers js-card-stickers"></div>
 		</div>
 		<div class="list-card-details clearfix">
-			<a href="#" class="list-card-title clear js-card-name"><span class="card-short-id hide">#4 </span>{{title}}</a>
+			<a href="#" class="list-card-title clear js-card-name">
+				<span class="card-short-id hide">#4 </span>{{title}}</a>
 			<div class="badges">
-				<div title="You are subscribed to this card." class="badge badge-state-image-only"><span class="badge-icon icon-sm icon-follow"></span>
+				<div title="You are subscribed to this card." class="badge badge-state-image-only">
+					<span class="badge-icon icon-sm icon-follow"></span>
 				</div>
-				<div title="This card has 1 comment." class="badge"><span class="badge-icon icon-sm icon-comment"></span>  <span class="badge-text">1</span>
+				<div title="This card has 1 comment." class="badge">
+					<span class="badge-icon icon-sm icon-comment"></span>
+					<span class="badge-text">1</span>
 				</div>
-				<div title="This card has 1 of 2 checklist items completed." class="badge"><span class="badge-icon icon-sm icon-checklist"></span>
+				<div title="This card has 1 of 2 checklist items completed." class="badge">
+					<span class="badge-icon icon-sm icon-checklist"></span>
 					<span class="badge-text">1/2</span>
 				</div>
 			</div>

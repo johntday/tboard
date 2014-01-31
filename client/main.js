@@ -11,6 +11,7 @@ Session.setDefault('card_id', '');
 Session.setDefault('stack_sort', 'seq_int');
 
 Session.setDefault('stack_title_edit_id', '');
+Session.setDefault('card_edit_stack_id', '');
 
 resizeHeight();
 
