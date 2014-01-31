@@ -36,7 +36,7 @@ Template.tmpl_board.events({
 	'click #header .header-boards-button': function(e) {
 		e.preventDefault();
 		$('#boards-drawer .boards-drawer').toggleClass('show');
-		console.log( e.currentTarget );
+		//console.log( e.currentTarget );
 	},
 	'mouseenter .list-card': function(e) {
 		$(e.currentTarget).addClass('active-card');
@@ -50,21 +50,19 @@ Template.tmpl_board.events({
 	'click #btn-right-side-bar-close': function(e) {
 		Session.set('hide_board_wrapper', true);
 	},
-	'click .board-header-btn': function(e) {
-		alert('"board-header-btn" CLICKED');
-		console.log( e.currentTarget );
-	},
+//	'click .board-header-btn': function(e) {
+//		alert('"board-header-btn" CLICKED');
+//		console.log( e.currentTarget );
+//	},
 //	'click .header-btn': function(e) {
 //		alert('"header-btn" CLICKED');
 //		console.log( e.currentTarget );
 //	},
-	'click .list-header-menu-icon': function(e) {
-		alert('"list-header-menu-icon" CLICKED');
-		console.log( e.currentTarget );
-	},
+//	'click .list-header-menu-icon': function(e) {
+//		alert('"list-header-menu-icon" CLICKED');
+//		console.log( e.currentTarget );
+//	},
 	'click .placeholder': function(e) {
-		alert('"placeholder" CLICKED');
-		console.log( e.currentTarget );
 		$( '.list.add-list').removeClass('idle');
 	},
 	'click .js-cancel-edit': function(e) {
@@ -73,20 +71,23 @@ Template.tmpl_board.events({
 	'click .js-save-edit': function(e) {
 		e.preventDefault();
 		$('.list.add-list').addClass('idle');
-		alert('"js-save-edit" CLICKED');
-		console.log( e.currentTarget );
 	},
-	'click .list-header': function(e) {
-		e.preventDefault();
-		alert('"list-header" CLICKED');
-		console.log( e.currentTarget );
-	},
-	'click .list-card-details': function(e) {
-		e.preventDefault();
-		alert('"list-card-details" CLICKED');
-		console.log( e.currentTarget );
-	},
+//	'click .list-header': function(e) {
+//		e.preventDefault();
+//		alert('"list-header" CLICKED');
+//		console.log( e.currentTarget );
+//	},
+//	'click .list-card-details': function(e) {
+//		e.preventDefault();
+//		alert('"list-card-details" CLICKED');
+//		console.log( e.currentTarget );
+//	},
 	'click .js-close-popover': function(e) {
+		e.preventDefault();
+		// CLOSE ALL POPUPS
+		Session.set('card_actions_pop_up', true);
+	},
+	'click #delete-card': function(e) {
 		e.preventDefault();
 		// CLOSE ALL POPUPS
 		Session.set('card_actions_pop_up', true);

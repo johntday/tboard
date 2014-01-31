@@ -23,13 +23,18 @@
 <template name="tmpl_stack_item">
 
 	<div class="list">
-		<div class="list-header js-list-header non-empty clearfix editable" attr="name">
-			<h2 class="list-header-name hide-on-edit js-list-name current">{{title}}</h2>
-			<!--<p class="list-header-num-cards hide js-num-cards">2 cards</p>-->
+		<div class="list-header js-list-header non-empty clearfix editable {{#if isStackTitleEdit}}editing{{/if}}" attr="name">
+			<h2 class="list-header-name hide-on-edit js-list-name current" data-stack-id="{{_id}}">{{title}}</h2>
 			<p class="list-header-num-cards js-num-cards">{{cards_cnt}} cards</p>
 			<span class="list-header-subscribe-icon icon-sm icon-follow js-list-subscribed hide"></span>
 			<div class="edit edit-heavy clearfix">
-				<textarea type="text" class="field single-line"></textarea>
+				<textarea type="text" class="field single-line" {{#if isStackTitleEdit}}style="height: 66px;"{{/if}}>{{title}}</textarea>
+				{{#if isStackTitleEdit}}
+				<div class="edit-controls clearfix">
+					<input type="submit" class="primary confirm js-save-edit save-stack-title" value="Save">
+					<a href="#" class="icon-lg icon-close dark-hover cancel js-cancel-edit cancel-stack-title"></a>
+				</div>
+				{{/if}}
 			</div>
 			<a href="#" class="list-header-menu-icon icon-sm icon-menu dark-hover js-open-list-menu"></a>
 		</div>
@@ -40,7 +45,7 @@
 				{{> tmpl_card}}
 			{{/each}}
 
-			<div class="card-composer hide" data-stack-id="{{_id}}"">
+			<div class="card-composer hide" data-stack-id="{{_id}}">
 				<div class="list-card js-composer" style="padding-bottom: 0px;">
 					<div class="list-card-labels clearfix js-list-card-composer-labels"></div>
 					<textarea class="list-card-composer-textarea js-card-title"></textarea>

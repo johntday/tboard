@@ -16,7 +16,6 @@ Template.tmpl_right_menu.events({
 		console.log ( Session.get('collapse_right_side_bar_menu') );
 		Session.get('collapse_right_side_bar_menu') ? $(e.currentTarget).removeClass('collapsed') : $(e.currentTarget).addClass('collapsed');
 		Session.set('collapse_right_side_bar_menu', !Session.get('collapse_right_side_bar_menu'));
-		alert("TODO: change board_widgets_content_height and board_actions_list_height");
 	}
 
 
