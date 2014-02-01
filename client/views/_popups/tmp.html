@@ -1,0 +1,41 @@
+<template name="tmp">
+
+	<div class="window slim" style="left: 625px; top: 50px; display: block;">
+		<a class="focus-dummy" href="#"></a>
+
+		<div class="window-wrapper clearfix" style="">
+			<div class="dialog-close-button"><a class="icon-lg icon-close dark-hover js-close-window" href="#" title="Close this dialog window."></a></div>
+			<div>
+				<div class="window-header clearfix"><span class="window-header-icon icon-lg icon-board"></span>
+
+					<div class="window-title non-empty inline  editable  " attr="name"><h2 class="window-title-text current hide-on-edit"> Tdocs </h2>
+
+						<p class="edits-warning quiet">You have unsaved edits on this field. <a href="#" class="js-view-edits">View edits</a> or <a href="#" class="js-discard-edits">discard</a>.
+						</p>
+
+						<div class="edit edit-heavy"><textarea type="text" class="field single-line"></textarea></div>
+					</div>
+				</div>
+				<div class="window-main-col">
+					<div class="board-description clearfix editable editing" attr="desc">
+						<div class="current markeddown hide-on-edit bottom"><p>Collab with Ben</p>
+						</div>
+						<p class="bottom js-edit-desc"><a class="quiet-button hide-on-edit w-img" href="#"><span class="icon-sm icon-edit"></span>Edit the board description.</a></p>
+
+						<p class="edits-warning quiet">You have unsaved edits on this field. <a href="#" class="js-view-edits">View edits</a> or <a href="#" class="js-discard-edits">discard</a>.
+						</p>
+
+						<div class="board-description-edit edit"><p class="helper"><a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown</a> accepted
+						</p> <textarea class="field" style="height: 248px;"></textarea>
+
+							<div class="edit-controls clearfix"><input type="submit" class="primary confirm js-save-edit" value="Save">
+								<a href="#" class="icon-lg icon-close dark-hover cancel js-cancel-edit"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</template>
