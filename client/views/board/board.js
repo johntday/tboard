@@ -42,6 +42,7 @@ Template.tmpl_board.helpers({
 	width: function() {
 		return Session.get('width') / 2;
 	}
+
 });
 /*------------------------------------------------------------------------------------------------------------------------------*/
 Template.tmpl_board.events({
