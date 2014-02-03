@@ -2,17 +2,23 @@
 
 	<div class="board-wrapper {{hideRightSideBar}}">
 		<div class="board-header clearfix js-board-header">
-			<a href="#" class="board-header-btn board-header-btn-name js-rename-board" title="Rename the board."> <span class="board-header-btn-text">{{title}}</span>
+			<a id="btn-rename-board-popup" href="#" class="board-header-btn board-header-btn-name js-rename-board" title="Rename the board."> <span
+					class="board-header-btn-text">{{title}}</span>
 			</a>
+			<!--
 			<a href="#" class="board-header-btn board-header-btn-org-name js-org-name board-header-btn-without-icon"
-			   title="This board is part of the My Meteor organization"> <span class="board-header-btn-text">{{description}}</span>
+			   title="This board is part of the My Meteor organization">
+				<span class="board-header-btn-text">{{description}}</span>
 			</a>
+			-->
 			<div class="board-header-btns left">
 				<a href="#" class="board-header-btn js-star-board board-header-btn-enabled"
 				   title="Click to star or unstar this board. Starred boards show up at the top of your boards list."> <span class="board-header-btn-icon icon-sm icon-star js-star-board-icon"></span>
 				</a>
-				<a href="#" class="board-header-btn js-open-desc js-fill-desc" title="Collab with Ben"> <span class="board-header-btn-icon icon-sm icon-edit"></span>
-				</a> <a href="#" class="board-header-btn perms-btn js-change-vis" id="permission-level" title="This board is visible to members of My Meteor.  Only people added to the board can edit."><span class="board-header-btn-icon icon-sm icon-org-private"></span> <span class="board-header-btn-text">Org Visible</span> </a>
+				<!--
+				<a href="#" class="board-header-btn js-open-desc js-fill-desc" title="{{description}}"> <span class="board-header-btn-icon icon-sm icon-edit"></span>
+				</a>
+				-->
 			</div>
 			<div class="board-header-btns right">
 				<a href="#" class="board-header-btn board-header-btn-filter-indicator hide js-filter-cards-indicator" title="You are filtering cards on this board. Click here to edit filter."> <span class="board-header-btn-icon icon-sm icon-filter"></span>  <span class="board-header-btn-text underline">Filtering is on.</span>  <span class="board-header-btn-icon-close icon-sm icon-close js-filter-card-clear" title="Clear filter."></span>

@@ -78,7 +78,11 @@ Template.tmpl_stack_item.events({
 		//stack_state.card_cnts[ this._id ] = (this.cards) ? this.cards.length : 0;
 
 		var seq_int = getCardCnt( stack_id );
-		var card = {title: title, seq_int: seq_int};
+		var card = {
+			title: title,
+			seq_int: seq_int,
+			userId: Meteor.userId()
+		};
 		Stacks.update(stack_id, { $addToSet: { cards: card } } );
 		//$('div.card-composer[data-stack-id='+stack_id+']').addClass('hide');
 	},

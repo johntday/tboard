@@ -38,28 +38,28 @@
 							class="left-arrow"></span>Roo! (<span class="js-phrase">New stuff available!</span>)</span>
 					</a>
 				</div>
-				{{#if currentUser}}
 				<div class="header-user">
 					<a class="header-btn header-btn-feedback js-open-feedback {{hideFeedback}}"
 					   title="Give us some feedback" href="#"> <span class="header-btn-icon icon-lg icon-comment light"></span>
 						<span class="header-btn-text">Feedback</span>
-					</a> <a class="header-btn hide upgrade" href="#"><span class="icon-sm icon-reopen light"></span><span class="header-btn-text">Update Available</span></a>
-					<a id="btn-create-new-board" class="header-btn js-open-add-menu"
-					   href="#" title="Add a new board or organization."> <span class="header-btn-icon icon-lg icon-add light"></span>
 					</a>
-					<a class="header-btn header-member js-open-header-member-menu" href="#" title="Your profile, help, and log out">
+					{{#if currentUser}}
+					<a id="btn-create-new-board" class="header-btn js-open-add-menu"
+					   href="#" title="Add a new board"> <span class="header-btn-icon icon-lg icon-add light"></span>
+					</a>
+					<a id="btn-profile" class="header-btn header-member js-open-header-member-menu" href="#" title="Your profile, help, and log out">
 					<span class="member">
-						<img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)" title="johntday (johntday)">
+						<img class="member-avatar" height="30" width="30" src="/img/30.png" alt="{{username}}">
 						<span class="member-gold-badge" title="This member has Trello Gold."></span>
 					</span>
-						<span class="header-btn-text js-member-name">johntday</span>
+						<span class="header-btn-text js-member-name">{{username}}</span>
 					</a>
 					<a class="header-btn header-notifications js-open-header-notifications-menu" href="#" title="0 Notifications">
 						<span class="header-btn-icon icon-lg icon-notification light"></span>
 					</a>
+					{{/if}}
 				</div>
 			</div>
-			{{/if}}
 
 
 			<p id="notification" style="display: none;"></p>
@@ -197,6 +197,54 @@
 
 			<!-- staging -->
 			<div id="staging" style="visibility: hidden; position: absolute; left: 0px; top: -100000px; width: 100%;"></div>
+
+			<!-- rename board -->
+			<div class="pop-over clearfix fancy-scrollbar" style="left: 8px; top: 85px; display:{{renameBoard}};">
+				<div class="header clearfix">
+					<span class="header-title">Rename Board</span>
+					<a class="close-btn js-close-popover" href="#"> <span class="icon-sm icon-close"></span> </a>
+				</div>
+				<div class="content clearfix" style="">
+					<div>
+						<form>
+							<label>Name</label>
+							<input type="text" class="js-board-name js-autofocus" value="{{title}}">
+							<input id="btn-rename-board" type="submit" class="primary wide js-rename-board" value="Rename">
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- profile -->
+			<div class="pop-over clearfix fancy-scrollbar" style="left:{{left}}px; top: 45px; max-height: {{list_cards_max_height}}px; display:{{profilePopUp}};">
+				<div class="header clearfix">
+					<span class="header-title">{{username}}</span>
+					<a class="close-btn js-close-popover" href="#">
+						<span class="icon-sm icon-close"></span>
+					</a>
+				</div>
+				<div class="content clearfix" style="">
+					<div>
+						<!--
+						<ul class="pop-over-list">
+							<li><a class="js-profile" href="/johntday">Profile</a></li>
+							<li><a class="js-cards" href="/johntday/cards">Cards</a></li>
+							<li><a class="js-account" href="/johntday/account">Settings</a></li>
+						</ul>
+						<hr>
+						<ul class="pop-over-list">
+							<li><a class="js-help" href="/help">Help</a></li>
+							<li><a class="js-reco" href="/recommend">Share Trello</a></li>
+						</ul>
+						<hr>
+						-->
+						<ul class="pop-over-list">
+							<li><a id="btn-logout" class="js-logout" href="#">Log Out</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
 
 		</div>
 

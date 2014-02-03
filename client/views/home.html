@@ -1,5 +1,14 @@
 <template name="home">
 	<div class="board-canvas" style="height:{{board_canvas_height}}px;">
 
+
+		{{#if currentUser}}
+		{{else}}
+
+			<div style="width: 700px; margin-left: auto; margin-right: auto;">
+				<h1>Login</h1>
+				{{loginButtons}}
+			</div>
+		{{/if}}
 	</div>
 </template>

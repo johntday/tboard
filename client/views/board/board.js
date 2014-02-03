@@ -40,7 +40,7 @@ Template.tmpl_board.helpers({
 		return createBoard();
 	},
 	width: function() {
-		return Session.get('width') / 2;
+		return popWidth;
 	}
 
 });
@@ -100,50 +100,55 @@ Template.tmpl_board.events({
 		// CLOSE ALL POPUPS
 		closeAllPopups();
 	},
-	'click #delete-card': function(e) {
-		e.preventDefault();
-		var cardStack = Session.get('card_edit_stack_id');
-		console.log( 'deleted card_id: ' + cardStack );
-		Stacks.update(cardStack.stack_id,
-			{
-				$pull: { cards: {seq_int: cardStack.seq_int} }
-			}
-		);
-		closeAllPopups();
-	},
-	'click #add-new-stack': function(e) {
-		e.preventDefault();
-		var title = $(e.currentTarget).closest('form').find('input').val();
-		var properties = {
-			title: title
-			,description:''
-			,board_id: Session.get('board_id')
-			,stack_int: getStackCnt() };
-		Meteor.call('createStack', properties, function(error, stack) {
-			if(error){
-				console.log(JSON.stringify(error));
-				//throwError(error.reason);
-				//$(e.target).removeClass('disabled');
-			}else{
-				MyLog("board.js/1", "added stack", {'stack': stack});
-				closeAllPopups();
-			}
-		});
-	},
-	'click #create-new-board': function(e) {
-		e.preventDefault();
-		var title = $('#boardNewTitle').val();
-		$('#boardNewTitle').val('');
-		var board = {
-			title: title
-		};
-		var board_id = Boards.insert( board );
-		closeAllPopups();
-		Router.go('/board/' + board_id);
-	},
+//	'click #delete-card': function(e) {
+//		e.preventDefault();
+//		var cardStack = Session.get('card_edit_stack_id');
+//		console.log( 'deleted card_id: ' + cardStack );
+//		Stacks.update(cardStack.stack_id,
+//			{
+//				$pull: { cards: {seq_int: cardStack.seq_int} }
+//			}
+//		);
+//		closeAllPopups();
+//	},
+//	'click #add-new-stack': function(e) {
+//		e.preventDefault();
+//		var title = $(e.currentTarget).closest('form').find('input').val();
+//		var properties = {
+//			title: title
+//			,description:''
+//			,board_id: Session.get('board_id')
+//			,stack_int: getStackCnt() };
+//		Meteor.call('createStack', properties, function(error, stack) {
+//			if(error){
+//				console.log(JSON.stringify(error));
+//				//throwError(error.reason);
+//				//$(e.target).removeClass('disabled');
+//			}else{
+//				MyLog("board.js/1", "added stack", {'stack': stack});
+//				closeAllPopups();
+//			}
+//		});
+//	},
+//	'click #create-new-board': function(e) {
+//		e.preventDefault();
+//		var title = $('#boardNewTitle').val();
+//		$('#boardNewTitle').val('');
+//		var board = {
+//			title: title,
+//			userId: Meteor.userId()
+//		};
+//		var board_id = Boards.insert( board );
+//		closeAllPopups();
+//		Router.go('/board/' + board_id);
+//	},
 	'click #btn-create-new-board': function(e) {
 		e.preventDefault();
 		Session.set('create_board_pop_up', !Session.get('create_board_pop_up'));
+	},
+	'click #btn-rename-board-popup': function(e) {
+		e.preventDefault();
+		Session.set('rename_board_pop_up', !Session.get('rename_board_pop_up'));
 	},
 	'click #btn-delete-stack': function(e) {
 		e.preventDefault();

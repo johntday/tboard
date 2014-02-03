@@ -1,4 +1,7 @@
 Template.tmpl_card.helpers({
+	username: function() {
+		return getUserDisplayName(Meteor.user());
+	}
 });
 /*------------------------------------------------------------------------------------------------------------------------------*/
 Template.tmpl_card.events({

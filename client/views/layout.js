@@ -1,18 +1,14 @@
 Template.layout.helpers({
 	board_canvas_height: function() {
-		//console.log("board_canvas_height="+Session.get('board_canvas_height'));
 		return Session.get('board_canvas_height');
 	},
 	list_area_width: function() {
-		//console.log("list_area_width="+Session.get('list_area_width'));
 		return Session.get('list_area_width');
 	},
 	list_cards_max_height: function() {
-		//console.log("list_cards_max_height="+Session.get('list_cards_max_height'));
 		return Session.get('list_cards_max_height');
 	},
 	board_drawer_content_max_height: function() {
-		//console.log("board_drawer_content_max_height="+Session.get('board_drawer_content_max_height'));
 		return Session.get('board_drawer_content_max_height');
 	},
 	hideWoof: function() {
@@ -39,8 +35,23 @@ Template.layout.helpers({
 	createBoard: function() {
 		return createBoard();
 	},
+	renameBoard: function() {
+		return renameBoard();
+	},
+	profilePopUp: function() {
+		return profilePopUp();
+	},
 	width: function() {
-		return Session.get('width') / 2;
+		return popWidth;
+	},
+	height: function() {
+		return popHeight;
+	},
+	left: function() {
+		return popWidth*2 - 230;
+	},
+	username: function() {
+		return getUserDisplayName(Meteor.user());
 	}
 
 });
@@ -49,7 +60,6 @@ Template.layout.events({
 	'click #header .header-boards-button': function(e) {
 		e.preventDefault();
 		$('#boards-drawer .boards-drawer').toggleClass('show');
-		//console.log( e.currentTarget );
 	},
 	'mouseenter .list-card': function(e) {
 		$(e.currentTarget).addClass('active-card');
@@ -103,7 +113,6 @@ Template.layout.events({
 	'click #delete-card': function(e) {
 		e.preventDefault();
 		var cardStack = Session.get('card_edit_stack_id');
-		console.log( 'deleted card_id: ' + cardStack );
 		Stacks.update(cardStack.stack_id,
 			{
 				$pull: { cards: {seq_int: cardStack.seq_int} }
@@ -118,7 +127,10 @@ Template.layout.events({
 			title: title
 			,description:''
 			,board_id: Session.get('board_id')
-			,stack_int: getStackCnt() };
+			,stack_int: getStackCnt()
+			,userId: Meteor.userId()
+		};
+		console.log('hi');
 		Stacks.insert( stack );
 		closeAllPopups();
 	},
@@ -127,9 +139,11 @@ Template.layout.events({
 		var title = $('#boardNewTitle').val();
 		$('#boardNewTitle').val('');
 		var board = {
-			title: title
+			title: title,
+			userId: Meteor.userId()
 		};
 		var board_id = Boards.insert( board );
+		console.log('hi');
 		closeAllPopups();
 		Router.go('/board/' + board_id);
 	},
@@ -140,10 +154,31 @@ Template.layout.events({
 	'click #btn-delete-stack': function(e) {
 		e.preventDefault();
 		var stack_Id = Session.get('stack_options_stack_id');
-		console.log( stack_Id );
 		Stacks.remove( stack_Id );
 		Session.set('stack_actions_pop_up', !Session.get('stack_actions_pop_up'));
 		closeAllPopups();
+	},
+	'click #btn-rename-board': function(e) {
+		e.preventDefault();
+		var title = $(e.currentTarget).closest('form').find('input[type="text"]').val();
+		if (title != this.title) {
+			Boards.update(this._id, {$set: {title: title}});
+		}
+		Session.set('rename_board_pop_up', !Session.get('rename_board_pop_up'));
+	},
+	'click #btn-profile': function(e) {
+		e.preventDefault();
+		Session.set('profile_pop_up', !Session.get('profile_pop_up'));
+	},
+	'click #btn-logout': function(e) {
+		e.preventDefault();
+		Meteor.logout(function(error){
+			if (error) {
+				console.log( error );
+			}
+		});
+		Session.set('profile_pop_up', !Session.get('profile_pop_up'));
+		Router.go('/');
 	}
 
 });
@@ -153,6 +188,8 @@ var closeAllPopups = function() {
 	Session.set('card_actions_pop_up', true);
 	Session.set('create_board_pop_up', true);
 	Session.set('stack_actions_pop_up', true);
+	Session.set('rename_board_pop_up', true);
+	Session.set('profile_pop_up', true);
 };
 /*------------------------------------------------------------------------------------------------------------------------------*/
 //Template.layout.rendered = function() {

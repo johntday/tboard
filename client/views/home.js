@@ -3,8 +3,9 @@ Template.home.helpers({
 		//console.log("board_canvas_height="+Session.get('board_canvas_height'));
 		return Session.get('board_canvas_height') + 40;
 	},
-	width: function() {
-		return Session.get('width') / 2;
+	left: function() {
+		console.log( popWidth );
+		return popWidth;
 	}
 
 });

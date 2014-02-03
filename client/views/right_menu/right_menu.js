@@ -6,6 +6,9 @@ Template.tmpl_right_menu.helpers({
 	board_actions_list_height: function() {
 		//console.log("board_actions_list_height="+Session.get('board_actions_list_height'));
 		return Session.get('board_actions_list_height');
+	},
+	username: function() {
+		return getUserDisplayName(Meteor.user());
 	}
 
 });

@@ -6,6 +6,9 @@ Session.setDefault('collapse_right_side_bar_menu', true);
 Session.setDefault('card_actions_pop_up', true);
 Session.setDefault('stack_actions_pop_up', true);
 Session.setDefault('create_board_pop_up', true);
+Session.setDefault('rename_board_pop_up', true);
+Session.setDefault('profile_pop_up', true);
+
 
 Session.setDefault('project_id', '');
 Session.setDefault('board_id', '');
@@ -17,9 +20,9 @@ Session.setDefault('stack_sort', 'seq_int');
 Session.setDefault('stack_title_edit_id', '');
 Session.setDefault('card_edit_stack_id', {});
 Session.setDefault('stack_options_stack_id','');
-Session.setDefault('width', 0);
 
-
+popWidth = $(window).width()/2 - 40;
+popHeight = $(window).height()/2 - 40;
 stackState = {card_cnts:{}, stack_cnt:0};
 getCardCnts = function() {
 	return stackState.card_cnts;
@@ -43,7 +46,8 @@ resizeHeight();
 function resizeHeight() {
 	var height = $(window).height();
 	var width  = $(window).width();
-	Session.set('width', width);
+	popWidth = width/2  - 40;
+	popHeight = height/2  - 40;
 	//console.log( "width="+width );
 	//console.log( "height="+height );
 	Session.set('board_widgets_content_height', height-80);//height_200);//852      #1
@@ -51,7 +55,7 @@ function resizeHeight() {
 
 	Session.set('board_canvas_height', height-110);//height_50);//802                 #2 do first
 	Session.set('list_area_width', (getStackCnt() === 0) ? 350 : 350 * getStackCnt() + 350 );
-	console.log ('resizeHeight: width='+width+', list_area_width='+Session.get('list_area_width')+', stackState='+JSON.stringify(stackState));
+	//console.log ('resizeHeight: width='+width+', list_area_width='+Session.get('list_area_width')+', stackState='+JSON.stringify(stackState));
 	Session.set('list_cards_max_height', height-220);//height_117);//735             #3
 	Session.set('board_drawer_content_max_height', height-14);//height_14);//838
 }
@@ -82,6 +86,12 @@ stackActionsPopUp = function() {
 };
 createBoard = function() {
 	return Session.get('create_board_pop_up') ? 'none' : 'block';
+};
+renameBoard = function() {
+	return Session.get('rename_board_pop_up') ? 'none' : 'block';
+};
+profilePopUp = function() {
+	return Session.get('profile_pop_up') ? 'none' : 'block';
 };
 
 
@@ -124,7 +134,7 @@ boardListSubscription = function(find, options, per_page) {
 };
 Deps.autorun(function(){
 	boardsHandle = boardListSubscription(
-		boardQuery( Session.get('project_id') ),
+		boardQuery( Meteor.userId(), Session.get('project_id') ),
 		boardSort[ Session.get('board_sort') ],
 		100
 	);

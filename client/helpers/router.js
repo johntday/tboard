@@ -10,10 +10,10 @@ Router.map(function () {
 		path  : '/board/:_id',
 		template: 'tmpl_board',
 		before: function () {
-//			if (!Meteor.user()) {
-//				this.render('login');
-//				this.stop();
-//			}
+			if (!Meteor.user()) {
+				this.render('home');
+				this.stop();
+			}
 			this.subscribe('pubsub_selected_board', this.params._id).wait();
 		},
 		data  : function () {
