@@ -7,7 +7,8 @@
         "git": "https://github.com/johntday/meteor-mypaginator.git",
         "branch": "master"
       },
-      "moment": {}
+      "moment": {},
+      "iron-router": {}
     },
     "packages": {
       "spin": {
@@ -24,6 +25,11 @@
         "git": "https://github.com/acreeger/meteor-moment.git",
         "tag": "v2.5.1",
         "commit": "8c9bc5d3fc96705057737cb9743d555417f6e551"
+      },
+      "iron-router": {
+        "git": "https://github.com/EventedMind/iron-router.git",
+        "tag": "v0.6.2",
+        "commit": "ce56e58b45624dce992490f3a1c10f10d3948bae"
       }
     }
   }
