@@ -50,7 +50,7 @@ function resizeHeight() {
 	Session.set('board_actions_list_height', height-280);//height_202);//650         #4
 
 	Session.set('board_canvas_height', height-110);//height_50);//802                 #2 do first
-	Session.set('list_area_width', 400 * getStackCnt() );
+	Session.set('list_area_width', (getStackCnt() === 0) ? 350 : 350 * getStackCnt() + 350 );
 	console.log ('resizeHeight: width='+width+', list_area_width='+Session.get('list_area_width')+', stackState='+JSON.stringify(stackState));
 	Session.set('list_cards_max_height', height-220);//height_117);//735             #3
 	Session.set('board_drawer_content_max_height', height-14);//height_14);//838

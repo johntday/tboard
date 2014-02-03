@@ -1,4 +1,4 @@
-Template.tmpl_board.helpers({
+Template.layout.helpers({
 	board_canvas_height: function() {
 		//console.log("board_canvas_height="+Session.get('board_canvas_height'));
 		return Session.get('board_canvas_height');
@@ -45,7 +45,7 @@ Template.tmpl_board.helpers({
 
 });
 /*------------------------------------------------------------------------------------------------------------------------------*/
-Template.tmpl_board.events({
+Template.layout.events({
 	'click #header .header-boards-button': function(e) {
 		e.preventDefault();
 		$('#boards-drawer .boards-drawer').toggleClass('show');
@@ -63,18 +63,18 @@ Template.tmpl_board.events({
 	'click #btn-right-side-bar-close': function(e) {
 		Session.set('hide_board_wrapper', true);
 	},
-//	'click .board-header-btn': function(e) {
-//		alert('"board-header-btn" CLICKED');
-//		console.log( e.currentTarget );
-//	},
-//	'click .header-btn': function(e) {
-//		alert('"header-btn" CLICKED');
-//		console.log( e.currentTarget );
-//	},
-//	'click .list-header-menu-icon': function(e) {
-//		alert('"list-header-menu-icon" CLICKED');
-//		console.log( e.currentTarget );
-//	},
+	//	'click .board-header-btn': function(e) {
+	//		alert('"board-header-btn" CLICKED');
+	//		console.log( e.currentTarget );
+	//	},
+	//	'click .header-btn': function(e) {
+	//		alert('"header-btn" CLICKED');
+	//		console.log( e.currentTarget );
+	//	},
+	//	'click .list-header-menu-icon': function(e) {
+	//		alert('"list-header-menu-icon" CLICKED');
+	//		console.log( e.currentTarget );
+	//	},
 	'click .placeholder': function(e) {
 		$( '.list.add-list').removeClass('idle');
 	},
@@ -85,16 +85,16 @@ Template.tmpl_board.events({
 		e.preventDefault();
 		$('.list.add-list').addClass('idle');
 	},
-//	'click .list-header': function(e) {
-//		e.preventDefault();
-//		alert('"list-header" CLICKED');
-//		console.log( e.currentTarget );
-//	},
-//	'click .list-card-details': function(e) {
-//		e.preventDefault();
-//		alert('"list-card-details" CLICKED');
-//		console.log( e.currentTarget );
-//	},
+	//	'click .list-header': function(e) {
+	//		e.preventDefault();
+	//		alert('"list-header" CLICKED');
+	//		console.log( e.currentTarget );
+	//	},
+	//	'click .list-card-details': function(e) {
+	//		e.preventDefault();
+	//		alert('"list-card-details" CLICKED');
+	//		console.log( e.currentTarget );
+	//	},
 	'click .js-close-popover': function(e) {
 		e.preventDefault();
 		// CLOSE ALL POPUPS
@@ -114,21 +114,13 @@ Template.tmpl_board.events({
 	'click #add-new-stack': function(e) {
 		e.preventDefault();
 		var title = $(e.currentTarget).closest('form').find('input').val();
-		var properties = {
+		var stack = {
 			title: title
 			,description:''
 			,board_id: Session.get('board_id')
 			,stack_int: getStackCnt() };
-		Meteor.call('createStack', properties, function(error, stack) {
-			if(error){
-				console.log(JSON.stringify(error));
-				//throwError(error.reason);
-				//$(e.target).removeClass('disabled');
-			}else{
-				MyLog("board.js/1", "added stack", {'stack': stack});
-				closeAllPopups();
-			}
-		});
+		Stacks.insert( stack );
+		closeAllPopups();
 	},
 	'click #create-new-board': function(e) {
 		e.preventDefault();
@@ -163,14 +155,14 @@ var closeAllPopups = function() {
 	Session.set('stack_actions_pop_up', true);
 };
 /*------------------------------------------------------------------------------------------------------------------------------*/
-//Template.tmpl_board.rendered = function() {
+//Template.layout.rendered = function() {
 //};
-//Template.tmpl_board.created = function() {
+//Template.layout.created = function() {
 //	$( window ).resize(function() {
 //		resizeHeight();
 //	});
 //};
 //
-//Template.tmpl_board.destroyed = function() {
+//Template.layout.destroyed = function() {
 //	$(window).off('resize');
 //};

@@ -80,7 +80,7 @@ Template.tmpl_stack_item.events({
 		var seq_int = getCardCnt( stack_id );
 		var card = {title: title, seq_int: seq_int};
 		Stacks.update(stack_id, { $addToSet: { cards: card } } );
-		$('div.card-composer[data-stack-id='+stack_id+']').addClass('hide');
+		//$('div.card-composer[data-stack-id='+stack_id+']').addClass('hide');
 	},
 	'click a.list-header-menu-icon': function(e) {
 		e.preventDefault();

@@ -1,259 +1,64 @@
 <template name="tmpl_board">
 
-	<div class="page-index  chrome chrome-32 windows extra-large-window body-board-background" style="background-color: rgb(35, 113, 159);">
-
-		<div id="nocss">
-			Your browser was unable to load all of our resources. They may have been blocked by your firewall, proxy or browser configuration.
-			<br>Please refresh your browser and try again
-			<hr>
-		</div>
-
-<!-- data -->
-		<div id="surface" class="clearfix" style="">
-<!-- header -->
-			<div id="header">
-				<a class="header-logo js-home-via-logo" href="/boards" title="Go back to your boards page."> <span class="header-logo-loading"></span>
-					<span class="header-logo-default"></span></a>
-				<div class="header-boards-button">
-					<a class="header-btn header-boards js-boards-menu" title="View list of boards" href="#"> <span class="header-btn-icon icon-lg icon-board light"></span>  <span class="header-btn-text">Boards</span>
-					</a>
-				</div>
-				<form>
-					<a href="#" class="header-btn show-search-btn js-show-search" title="Search for stuff"> <span
-							class="header-btn-icon icon-lg icon-search light"></span>
-					</a>
-					<div id="header-search">
-						<label for="search-text">Global Search</label>
-						<input id="search-text" type="text" autocomplete="off" autocorrect="off" spellcheck="false" value="">
-						<input id="search-submit" type="submit" value="Search">
-						<a class="header-btn header-search js-search-submit" href="#" title="Search for stuff"> <span
-								class="header-btn-icon icon-lg icon-search light"></span>
-						</a>
-					</div>
-				</form>
-				<div>
-					<a class="header-btn header-woof {{hideWoof}}" href="#"> <span class="taco-talk-small-icon"></span>  <span
-							class="header-btn-text"><span
-							class="left-arrow"></span>Roo! (<span class="js-phrase">New stuff available!</span>)</span>
-					</a>
-				</div>
-				<div class="header-user">
-					<a class="header-btn header-btn-feedback js-open-feedback {{hideFeedback}}"
-					   title="You are seeing an early, experimental version of Trello. We would love your feedback!" href="#"> <span class="header-btn-icon icon-lg icon-comment light"></span>  <span class="header-btn-text">Give us feedback.</span>
-					</a> <a class="header-btn hide upgrade" href="#"><span class="icon-sm icon-reopen light"></span><span class="header-btn-text">Update Available</span></a>
-					<a id="btn-create-new-board"class="header-btn js-open-add-menu"
-					   href="#" title="Add a new board or organization."> <span class="header-btn-icon icon-lg icon-add light"></span>
-					</a>
-					<a class="header-btn header-member js-open-header-member-menu" href="#"
-					   title="Your profile, help, and log out"> <span class="member"> <img class="member-avatar" height="30" width="30" src="/img/30.png" alt="johntday (johntday)"
-					                                                                     title="johntday (johntday)">        <span class="member-gold-badge" title="This member has Trello Gold."></span> </span>
-			                    <span
-					                    class="header-btn-text js-member-name">johntday</span>
-					</a>
-					<a class="header-btn header-notifications js-open-header-notifications-menu" href="#" title="0 Notifications"> <span class="header-btn-icon icon-lg icon-notification light"></span>
-					</a>
-				</div>
-			</div>
-			<p id="notification" style="display: none;"></p>
-
-			<div id="content" class="clearfix">
-
-			{{#if isBoard}}
-			<div class="board-wrapper {{hideRightSideBar}}">
-				<div class="board-header clearfix js-board-header">
-					<a href="#" class="board-header-btn board-header-btn-name js-rename-board" title="Rename the board."> <span class="board-header-btn-text">{{title}}</span>
-					</a>
-					<a href="#" class="board-header-btn board-header-btn-org-name js-org-name board-header-btn-without-icon"
-					   title="This board is part of the My Meteor organization"> <span class="board-header-btn-text">{{description}}</span>
-					</a>
-					<div class="board-header-btns left">
-						<a href="#" class="board-header-btn js-star-board board-header-btn-enabled"
-						   title="Click to star or unstar this board. Starred boards show up at the top of your boards list."> <span class="board-header-btn-icon icon-sm icon-star js-star-board-icon"></span>
-						</a>
-						<a href="#" class="board-header-btn js-open-desc js-fill-desc" title="Collab with Ben"> <span class="board-header-btn-icon icon-sm icon-edit"></span>
-						</a> <a href="#" class="board-header-btn perms-btn js-change-vis" id="permission-level" title="This board is visible to members of My Meteor.  Only people added to the board can edit."><span class="board-header-btn-icon icon-sm icon-org-private"></span> <span class="board-header-btn-text">Org Visible</span> </a>
-					</div>
-					<div class="board-header-btns right">
-						<a href="#" class="board-header-btn board-header-btn-filter-indicator hide js-filter-cards-indicator" title="You are filtering cards on this board. Click here to edit filter."> <span class="board-header-btn-icon icon-sm icon-filter"></span>  <span class="board-header-btn-text underline">Filtering is on.</span>  <span class="board-header-btn-icon-close icon-sm icon-close js-filter-card-clear" title="Clear filter."></span>
-						</a>
-						<div class="board-header-btn sub-btn hide js-board-header-subscribed" title="You are subscribed to this board. You&#39;ll get notifications about changes."> <span class="board-header-btn-icon icon-sm icon-follow"></span>  <span class="board-header-btn-text underline">Subscribed</span>
-						</div>
-						<a href="#" class="board-header-btn calendar-btn hide js-calendar" title="View all your cards with due dates in a calendar view."> <span class="board-header-btn-icon icon-sm icon-cal"></span>  <span class="board-header-btn-text underline">Calendar</span>
-						</a>
-					</div>
-				</div>
-				<a id="btn-right-side-bar-open" href="#" class="sidebar-show-btn dark-hover js-show-sidebar"> <span class="icon-sm icon-leftarrow"></span>  <span class="text">Show
-					sidebar</span>
+	<div class="board-wrapper {{hideRightSideBar}}">
+		<div class="board-header clearfix js-board-header">
+			<a href="#" class="board-header-btn board-header-btn-name js-rename-board" title="Rename the board."> <span class="board-header-btn-text">{{title}}</span>
+			</a>
+			<a href="#" class="board-header-btn board-header-btn-org-name js-org-name board-header-btn-without-icon"
+			   title="This board is part of the My Meteor organization"> <span class="board-header-btn-text">{{description}}</span>
+			</a>
+			<div class="board-header-btns left">
+				<a href="#" class="board-header-btn js-star-board board-header-btn-enabled"
+				   title="Click to star or unstar this board. Starred boards show up at the top of your boards list."> <span class="board-header-btn-icon icon-sm icon-star js-star-board-icon"></span>
 				</a>
+				<a href="#" class="board-header-btn js-open-desc js-fill-desc" title="Collab with Ben"> <span class="board-header-btn-icon icon-sm icon-edit"></span>
+				</a> <a href="#" class="board-header-btn perms-btn js-change-vis" id="permission-level" title="This board is visible to members of My Meteor.  Only people added to the board can edit."><span class="board-header-btn-icon icon-sm icon-org-private"></span> <span class="board-header-btn-text">Org Visible</span> </a>
+			</div>
+			<div class="board-header-btns right">
+				<a href="#" class="board-header-btn board-header-btn-filter-indicator hide js-filter-cards-indicator" title="You are filtering cards on this board. Click here to edit filter."> <span class="board-header-btn-icon icon-sm icon-filter"></span>  <span class="board-header-btn-text underline">Filtering is on.</span>  <span class="board-header-btn-icon-close icon-sm icon-close js-filter-card-clear" title="Clear filter."></span>
+				</a>
+				<div class="board-header-btn sub-btn hide js-board-header-subscribed" title="You are subscribed to this board. You&#39;ll get notifications about changes."> <span class="board-header-btn-icon icon-sm icon-follow"></span>  <span class="board-header-btn-text underline">Subscribed</span>
+				</div>
+				<a href="#" class="board-header-btn calendar-btn hide js-calendar" title="View all your cards with due dates in a calendar view."> <span class="board-header-btn-icon icon-sm icon-cal"></span>  <span class="board-header-btn-text underline">Calendar</span>
+				</a>
+			</div>
+		</div>
+		<a id="btn-right-side-bar-open" href="#" class="sidebar-show-btn dark-hover js-show-sidebar"> <span class="icon-sm icon-leftarrow"></span>
+			<span class="text">Show sidebar</span>
+		</a>
 
-<!--==========================
-	RIGHT MENU -->
-				{{> tmpl_right_menu}}
+		<!--==========================
+			RIGHT MENU -->
+		{{> tmpl_right_menu}}
 
-				<div class="board-canvas" style="height:{{board_canvas_height}}px;">
-				<div id="board" class="clearfix">
+		<div class="board-canvas" style="height:{{board_canvas_height}}px;">
+			<div id="board" class="clearfix">
 				<div class="list-area-wrapper fancy-scrollbar">
-				<div class="list-area  js-list-sortable  js-no-higher-edits clearfix ui-sortable" style="width:{{list_area_width}}px;">
+					<div class="list-area  js-list-sortable  js-no-higher-edits clearfix ui-sortable" style="width:{{list_area_width}}px;">
 
 
+						{{> tmpl_stacks}}
 
-				{{> tmpl_stacks}}
 
-
-				{{#if isBoard}}
-				<div class="list add-list idle">
-					<form>
-						<span class="placeholder js-open-add-list">Add a stack?</span>
-						<input type="text" class="list-name-input" name="name" placeholder="Add a stack?" autocomplete="off">
-						<div class="edit-controls keep clearfix">
-							<input type="submit" class="primary confirm js-save-edit" value="Save" id="add-new-stack">
-							<a href="#" class="icon-lg icon-close dark-hover cancel js-cancel-edit"></a>
+						<div class="list add-list idle">
+							<form>
+								<span class="placeholder js-open-add-list">Add a stack?</span>
+								<input type="text" class="list-name-input" name="name" placeholder="Add a stack?" autocomplete="off">
+								<div class="edit-controls keep clearfix">
+									<input type="submit" class="primary confirm js-save-edit" value="Save" id="add-new-stack">
+									<a href="#" class="icon-lg icon-close dark-hover cancel js-cancel-edit"></a>
+								</div>
+							</form>
 						</div>
-					</form>
-				</div>
-				{{/if}}
-				<div class="version-tag"></div>
-				</div>
+
+						<div class="version-tag"></div>
+					</div>
 				</div>
 				<div class="bottom-archive-dropzone js-bottom-archive-dropzone"></div>
-				</div>
-				</div>
-			</div>
-			</div>
-			{{/if}}
-			<noscript class="big-message">&lt;h1&gt;To use Tboard, you need to enable JavaScript&lt;/h1&gt;</noscript>
-			<div id="boards-drawer">
-				<div class="boards-drawer">
-					<div class="boards-drawer-header js-drawer-header">
-						<h3>Boards</h3>
-					</div>
-					<div class="board-drawer-content fancy-scrollbar" style="max-height:{{board_drawer_content_max_height}}px;">
-						<input type="text" class="js-search-boards" placeholder="Find boards by name?">
-						<div class="js-board-results-container hide">
-							<ul class="sidebar-boards-list js-board-results"></ul>
-						</div>
-
-						{{> tmpl_boards}}
-
-					</div>
-				</div>
 			</div>
 		</div>
-
-<!-- window-overlay -->
-		<div class="window-overlay">
-		</div>
-
-
-
-
-		<!-- pop-over -->
-		<div class="pop-over clearfix fancy-scrollbar" style="left:{{width}}px; top: 317px; max-height:{{list_cards_max_height}}px; display: none;">
-			<div class="header clearfix">
-				<a class="back-btn js-back-view" href="#" style="display: none;"> <span class="icon-sm icon-leftarrow"></span>
-				</a> <span class="header-title">Add Checklist</span>
-				<a class="close-btn js-close-popover" href="#"> <span class="icon-sm icon-close"></span>
-				</a>
-			</div>
-			<div class="content clearfix" style=""></div>
-		</div>
-
-<!-- CREATE NEW BOARD -->
-		<div class="pop-over clearfix fancy-scrollbar" style="left:{{width}}px; top: 45px; max-height:{{list_cards_max_height}}px; display:{{createBoard}};">
-			<div class="header clearfix">
-				<a class="back-btn js-back-view" href="#" style="display: none;">
-					<span class="icon-sm icon-leftarrow"></span>
-				</a>
-				<span class="header-title">Create Board</span>
-				<a class="close-btn js-close-popover" href="#">
-					<span class="icon-sm icon-close"></span>
-				</a>
-			</div>
-			<div class="content clearfix" style="">
-				<div>
-					<form>
-						<label for="boardNewTitle">Title</label>
-						<input id="boardNewTitle" type="text" name="name" class="non-empty js-autofocus" placeholder="Untitled Board">
-						<input type="submit" class="primary wide js-submit" value="Create" id="create-new-board">
-					</form>
-				</div>
-			</div>
-		</div>
-
-<!--pop over stack -->
-		<div class="pop-over clearfix fancy-scrollbar" style="left:{{width}}px; top: 115px; max-height:{{list_cards_max_height}}px; display:{{stack_actions_pop_up}};">
-			<div class="header clearfix"><a class="back-btn js-back-view" href="#" style="display: none;"> <span class="icon-sm icon-leftarrow"></span> </a> <span class="header-title">List Actions</span>
-				<a class="close-btn js-close-popover" href="#"> <span class="icon-sm icon-close"></span> </a></div>
-			<div class="content clearfix" style="">
-				<div>
-<!--
-					<ul class="pop-over-list">
-						<li><a class="js-add-card" href="#">Add Card…</a></li>
-						<li><a class="js-copy-list" href="#">Copy List…</a></li>
-						<li><a class="js-move-list" href="#">Move List…</a></li>
-						<li><a class="highlight-icon js-list-subscribe" href="#">Subscribe</a></li>
-					</ul>
-					<hr>
-					<ul class="pop-over-list">
-						<li><a class="js-move-cards" href="#">Move All Cards in This List…</a></li>
-						<li><a class="js-archive-cards" href="#">Archive All Cards in This List…</a></li>
-					</ul>
-					<hr>
-					-->
-					<ul class="pop-over-list">
-						<li><a id="btn-delete-stack" class="js-close-list" href="#">Delete this stack</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-
-<!-- pop-over CARD ACTIONS -->
-		<div class="pop-over clearfix fancy-scrollbar" style="left:{{width}}px; top: 329px; max-height:{{list_cards_max_height}}px; display:{{card_actions_pop_up}};">
-			<div class="header clearfix">
-				<a class="back-btn js-back-view" href="#" style="display: none;"> <span class="icon-sm icon-leftarrow"></span>
-				</a> <span class="header-title">Card Actions</span>
-				<a class="close-btn js-close-popover" href="#"> <span class="icon-sm icon-close"></span>
-				</a>
-			</div>
-			<div class="content clearfix" style="">
-				<div>
-					<ul class="pop-over-list">
-						<!--
-						<li> <a class="js-edit-labels" href="#">Labels…</a>
-						</li>
-						<li> <a class="js-change-card-members" href="#">Members…</a>
-						</li>
-						<li> <a class="js-due-date" href="#">Due Date…</a>
-						</li>
-						<li> <a class="js-move-card" href="#">Move…</a>
-						</li>
-						<li> <a class="js-subscribe highlight-icon" href="#">Subscribe</a>
-						</li>
-						<li> <a class="js-more" href="#">More Actions…</a>
-						</li>
-					</ul>
-					<hr>
-					<ul class="pop-over-list">
-					-->
-						<li> <a class="js-archive-card" href="#" id="delete-card">Delete</a>
-						</li>
-					<!--</ul>-->
-				</div>
-			</div>
-		</div>
-
-		<!-- tooltip-container POPUP -->
-		<div class="tooltip-container"></div>
-
-		<!-- clipboard-container POPUP -->
-		<div id="clipboard-container"></div>
-
-		<!-- sticker-edit -->
-		<a href="#" class="sticker-edit-button js-edit-sticker" id="edit-sticker" style="display: none;"><span class="icon-sm icon-sticker"></span> <span class="text">Edit sticker.</span></a>
-
-		<!-- staging -->
-		<div id="staging" style="visibility: hidden; position: absolute; left: 0px; top: -100000px; width: 100%;"></div>
-
 	</div>
+	</div>
+
 
 </template>
