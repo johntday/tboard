@@ -113,14 +113,12 @@ Template.tmpl_board.events({
 	},
 	'click #add-new-stack': function(e) {
 		e.preventDefault();
-		var stack_int = stack_state.stack_cnt++;
 		var title = $(e.currentTarget).closest('form').find('input').val();
-		//$(e.currentTarget).closest('form').find('input').val('');
 		var stack = {
 			title: title
 			,description:''
 			,board_id: Session.get('board_id')
-			,stack_int:stack_int };
+			,stack_int: getStackCnt() };
 		Stacks.insert( stack );
 		closeAllPopups();
 	},

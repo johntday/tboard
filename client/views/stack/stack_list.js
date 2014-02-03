@@ -14,7 +14,6 @@ Template.tmpl_stack_list.helpers({
 		return this.ready();
 	},
 	allLoaded: function() {
-		stack_state.stack_cnt = this.fetch().length;
 		return ( this.fetch().length < this.loaded() );
 	}
 });
@@ -35,8 +34,6 @@ Template.tmpl_stack_item.helpers({
 		return this.cards;
 	},
 	cards_cnt: function() {
-		stack_state.card_cnts[ this._id ] = (this.cards) ? this.cards.length : 0;
-
 		return (this.cards) ? this.cards.length : 0;
 	},
 	isStackTitleEdit: function() {
@@ -78,9 +75,9 @@ Template.tmpl_stack_item.events({
 		var stack_id = $(e.currentTarget).data('stackId');
 		var title = $('div.card-composer[data-stack-id='+stack_id+'] .js-card-title').val();
 
-		stack_state.card_cnts[ this._id ] = (this.cards) ? this.cards.length : 0;
+		//stack_state.card_cnts[ this._id ] = (this.cards) ? this.cards.length : 0;
 
-		var seq_int = stack_state[ stack_id ];
+		var seq_int = getCardCnt( stack_id );
 		var card = {title: title, seq_int: seq_int};
 		Stacks.update(stack_id, { $addToSet: { cards: card } } );
 		$('div.card-composer[data-stack-id='+stack_id+']').addClass('hide');

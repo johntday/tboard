@@ -19,7 +19,23 @@ Session.setDefault('card_edit_stack_id', {});
 Session.setDefault('stack_options_stack_id','');
 Session.setDefault('width', 0);
 
-stack_state = {card_cnts:{}, stack_cnt:0};
+
+stackState = {card_cnts:{}, stack_cnt:0};
+getCardCnts = function() {
+	return stackState.card_cnts;
+};
+getCardCnt = function(stack_id) {
+	return stackState.card_cnts[ stack_id ];
+};
+getStackCnt = function() {
+	return stackState.stack_cnt;
+};
+setStackState = function(card_cnts, stack_cnt) {
+	if (card_cnts) stackState.card_cnts = card_cnts;
+	if (stack_cnt) stackState.stack_cnt = stack_cnt;
+	resizeHeight();
+};
+
 
 //-------------------------------------------------
 resizeHeight();
@@ -34,7 +50,8 @@ function resizeHeight() {
 	Session.set('board_actions_list_height', height-280);//height_202);//650         #4
 
 	Session.set('board_canvas_height', height-110);//height_50);//802                 #2 do first
-	Session.set('list_area_width', width - stack_state.stack_cnt*30);
+	Session.set('list_area_width', 400 * getStackCnt() );
+	console.log ('resizeHeight: width='+width+', list_area_width='+Session.get('list_area_width')+', stackState='+JSON.stringify(stackState));
 	Session.set('list_cards_max_height', height-220);//height_117);//735             #3
 	Session.set('board_drawer_content_max_height', height-14);//height_14);//838
 }
@@ -76,6 +93,9 @@ createBoard = function() {
 
 //Session.set('project_id', '9K9zxCmh77m4xuxBF');
 //Session.set('board_id', 'w9MWBZCGzsxhQ5Tsw');
+Deps.autorun(function(){
+	resizeHeight();
+});
 
 
 projectListSubscription = function(find, options, per_page) {
@@ -114,7 +134,7 @@ stackListSubscription = function(find, options, per_page) {
 	var handle = Meteor.subscribeWithPagination('pubsub_stacks', find, options, per_page);
 	handle.fetch = function() {
 		var ourFind = _.isFunction(find) ? find() : find;
-		return limitDocuments(Stacks.find(ourFind, options), handle.loaded());
+		return stackDocuments(Stacks.find(ourFind, options), handle.loaded());
 	}
 	return handle;
 };
