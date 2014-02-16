@@ -95,4 +95,9 @@ Template.tmpl_stack_item.events({
 	}
 
 });
+Template.tmpl_stack_item.rendered = function() {
+	$( "#sortable-"+this.data._id ).sortable({
+		placeholder: "list-card-placeholder"
+	});
+};
 /*------------------------------------------------------------------------------------------------------------------------------*/
