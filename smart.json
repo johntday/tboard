@@ -1,10 +1,11 @@
 {
-	"packages": {
-		"iron-router": {},
-		"spin": {},
-		"mypaginator": {
-			"git": "https://github.com/johntday/meteor-mypaginator.git"
-		},
-		"moment": {}
-	}
+  "packages": {
+    "iron-router": {},
+    "spin": {},
+    "mypaginator": {
+      "git": "https://github.com/johntday/meteor-mypaginator.git"
+    },
+    "moment": {},
+    "jquery-ui": {}
+  }
 }
