@@ -192,8 +192,18 @@ var closeAllPopups = function() {
 	Session.set('profile_pop_up', true);
 };
 /*------------------------------------------------------------------------------------------------------------------------------*/
-//Template.layout.rendered = function() {
-//};
+Template.layout.rendered = function() {
+	$( ".ui-sortable" ).sortable({
+		//$( "#sortable-"+this.data._id ).sortable({
+		//placeholder: "list-card-placeholder"
+		start: function(e,ui) {
+			//console.log('start: '+ui.item.html());
+		}
+		,stop: function(e,ui) {
+			//console.log('stop: '+ui.item.html());
+		}
+	});
+};
 //Template.layout.created = function() {
 //	$( window ).resize(function() {
 //		resizeHeight();
